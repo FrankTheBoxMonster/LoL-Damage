@@ -1,0 +1,16 @@
+body {
+    font-family: Arial;
+}
+
+table {
+    border-spacing: 0px;
+    border: 1px solid;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid;
+    text-align: left;
+    vertical-align: bottom;
+    padding: 5px;
+}
