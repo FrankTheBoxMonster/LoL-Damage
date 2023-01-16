@@ -1,7 +1,28 @@
+var filterHeaderDiv = document.createElement("div");
+document.body.appendChild(filterHeaderDiv);
+filterHeaderDiv.style.marginTop = "-10px";
+filterHeaderDiv.style.marginBottom = "-10px";
+
 var clearFiltersButton = document.createElement("button");
-document.body.appendChild(clearFiltersButton);
-clearFiltersButton.innerHTML = "clear";
+filterHeaderDiv.appendChild(clearFiltersButton);
+clearFiltersButton.innerHTML = "clear filters";
 clearFiltersButton.onclick = ClearFilters;
+
+var filterNameLabel = document.createElement("p");
+filterHeaderDiv.appendChild(filterNameLabel);
+filterNameLabel.innerHTML = "name:";
+filterNameLabel.style.display = "inline-block";
+filterNameLabel.style.marginLeft = "42px";
+filterNameLabel.style.marginRight = "5px";
+
+var filterNameInput = document.createElement("input");
+filterHeaderDiv.appendChild(filterNameInput);
+filterNameInput.type = "text";
+filterNameInput.style.width = "280px";
+filterNameInput.addEventListener("input", (event) => {
+    UpdateFilters();
+});
+
 
 
 var filterTable = document.createElement("table");
@@ -12,6 +33,11 @@ document.body.appendChild(damageTable);
 
 
 
+
+var filterTableHeader = filterTable.createTHead().insertRow(0);
+filterTableHeader.insertCell().appendChild(document.createTextNode("categories"));
+filterTableHeader.insertCell().appendChild(document.createTextNode("properties"));
+filterTableHeader.insertCell().appendChild(document.createTextNode("tags"));
 
 var filterTableRow = filterTable.insertRow();
 var categoriesFilterCell = filterTableRow.insertCell();
@@ -87,10 +113,12 @@ function BuildDamageRecordSet(category, records, namePrefix) {
         var record = records[recordName]
         var row = damageTable.insertRow();
         row.damageRecord = record;
+        
         record.category = category;
+        record.fullName = namePrefix + recordName;
         
         var nameCell = row.insertCell();
-        nameCell.innerHTML = namePrefix + recordName;
+        nameCell.innerHTML = record.fullName;
         
         
         var damageTypeCell = row.insertCell();
@@ -169,12 +197,16 @@ function BuildPropertiesTagsCell(row, keys, match) {
 
 
 function UpdateFilters() {
+    var filterNameLower = filterNameInput.value.toLowerCase();
+    
     for(var row of damageTable.rows) {
         var record = row.damageRecord;
         if(row.damageRecord == null) {
             continue;
         }
         
+        
+        var nameFilter = (record.fullName.toLowerCase().includes(filterNameLower) == true);
         
         var categoryFilter = UpdateFilterGroup(damageFilterSettings.categories,
             (name, show, filter) => {
@@ -216,7 +248,7 @@ function UpdateFilters() {
         );
         
         
-        var show = (categoryFilter == true && propertyFilter == true && tagFilter == true);
+        var show = (nameFilter == true && categoryFilter == true && propertyFilter == true && tagFilter == true);
         if(show == true) {
             row.style.display = "";
         } else {
@@ -303,6 +335,8 @@ function GetFilter(checkbox) {
 }
 
 function ClearFilters() {
+    filterNameInput.value = "";
+    
     for(var group in damageFilterSettings) {
         for(var name in damageFilterSettings[group]) {
             var filter = damageFilterSettings[group][name];
