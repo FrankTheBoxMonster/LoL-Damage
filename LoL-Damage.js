@@ -303,8 +303,12 @@ function GetFilter(checkbox) {
 }
 
 function ClearFilters() {
-    for(var child of filterTable.children) {
-        child.indeterminate = true;
+    for(var group in damageFilterSettings) {
+        for(var name in damageFilterSettings[group]) {
+            var filter = damageFilterSettings[group][name];
+            filter.indeterminate = true;
+            filter.clickCount = 0;
+        }
     }
     
     /*damageFilterSettings.categories["deprecated"].indeterminate = false;
