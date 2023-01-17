@@ -378,6 +378,9 @@ function CopyURL() {
     }
     
     var params = "";
+    if(filterNameInput.value != "") {
+        params += "?name=" + filterNameInput.value;
+    }
     
     for(var group in damageFilterSettings) {
         for(var name in damageFilterSettings[group]) {
@@ -395,7 +398,7 @@ function CopyURL() {
         }
     }
     
-    url += params;
+    url += encodeURI(params);
     
     // there's no direct clipboard API so we have to do this instead
     var dummy = document.createElement("input");
@@ -416,6 +419,7 @@ function ReadURL() {
     }
     
     var paramsString = url.substring(trim + 1);
+    paramsString = decodeURI(paramsString);
     var params = paramsString.split("&");
     
     for(var param of params) {
@@ -423,22 +427,28 @@ function ReadURL() {
         var paramName = split[0];
         var paramValue = split[1];
         
-        for(var group in damageFilterSettings) {
-            for(var name in damageFilterSettings[group]) {
-                if(name == paramName) {
-                    var checkbox = damageFilterSettings[group][name];
-                    checkbox.checked = (paramValue == "true");
-                    checkbox.indeterminate = false;
-                    
-                    if(checkbox.checked == true) {
-                        checkbox.clickCount = 1;
-                    } else {
-                        checkbox.clickCount = 2;
+        if(paramName == "name") {
+            filterNameInput.value = paramValue;
+        } else {
+            for(var group in damageFilterSettings) {
+                for(var name in damageFilterSettings[group]) {
+                    if(name == paramName) {
+                        var checkbox = damageFilterSettings[group][name];
+                        checkbox.checked = (paramValue == "true");
+                        checkbox.indeterminate = false;
+                        
+                        if(checkbox.checked == true) {
+                            checkbox.clickCount = 1;
+                        } else {
+                            checkbox.clickCount = 2;
+                        }
                     }
                 }
             }
         }
     }
+    
+    UpdateFilters();
 }
 
 ReadURL();
