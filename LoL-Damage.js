@@ -24,6 +24,18 @@ filterNameInput.addEventListener("input", (event) => {
 });
 
 
+var totalCountLabel = document.createElement("p");
+filterHeaderDiv.appendChild(totalCountLabel);
+totalCountLabel.style.display = "inline-block";
+totalCountLabel.style.marginLeft = "10px";
+totalCountLabel.style.marginRight = "10px";
+
+var copyLinkButton = document.createElement("button");
+filterHeaderDiv.appendChild(copyLinkButton);
+copyLinkButton.innerHTML = "copy filter URL";
+copyLinkButton.onclick = CopyURL;
+
+
 
 var filterTable = document.createElement("table");
 document.body.appendChild(filterTable);
@@ -197,6 +209,7 @@ function BuildPropertiesTagsCell(row, keys, match) {
 
 
 function UpdateFilters() {
+    var filterPassCount = 0;
     var filterNameLower = filterNameInput.value.toLowerCase();
     
     for(var row of damageTable.rows) {
@@ -251,10 +264,13 @@ function UpdateFilters() {
         var show = (nameFilter == true && categoryFilter == true && propertyFilter == true && tagFilter == true);
         if(show == true) {
             row.style.display = "";
+            filterPassCount++;
         } else {
             row.style.display = "none";
         }
     }
+    
+    totalCountLabel.innerHTML = "record count:  " + filterPassCount;
 }
 
 function UpdateFilterGroup(filters, checkFilterCallback) {
@@ -352,3 +368,77 @@ function ClearFilters() {
 }
 
 UpdateFilters();
+
+
+function CopyURL() {
+    var url = document.URL;
+    var trim = document.URL.indexOf("?");
+    if(trim >= 0) {
+        url = url.substring(0, trim);
+    }
+    
+    var params = "";
+    
+    for(var group in damageFilterSettings) {
+        for(var name in damageFilterSettings[group]) {
+            var checkbox = damageFilterSettings[group][name];
+            var filter = GetFilter(checkbox);
+            if(filter != DamageFilter.Irrelevant) {
+                if(params != "") {
+                    params += "&";
+                } else {
+                    params += "?";
+                }
+                
+                params += name + "=" + checkbox.checked;
+            }
+        }
+    }
+    
+    url += params;
+    
+    // there's no direct clipboard API so we have to do this instead
+    var dummy = document.createElement("input");
+    document.body.appendChild(dummy);
+    dummy.value = url;
+    dummy.select();
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
+}
+
+function ReadURL() {
+    ClearFilters();
+    
+    var url = document.URL;
+    var trim = url.indexOf("?");
+    if(trim < 0) {
+        return;
+    }
+    
+    var paramsString = url.substring(trim + 1);
+    var params = paramsString.split("&");
+    
+    for(var param of params) {
+        var split = param.split("=");
+        var paramName = split[0];
+        var paramValue = split[1];
+        
+        for(var group in damageFilterSettings) {
+            for(var name in damageFilterSettings[group]) {
+                if(name == paramName) {
+                    var checkbox = damageFilterSettings[group][name];
+                    checkbox.checked = (paramValue == "true");
+                    checkbox.indeterminate = false;
+                    
+                    if(checkbox.checked == true) {
+                        checkbox.clickCount = 1;
+                    } else {
+                        checkbox.clickCount = 2;
+                    }
+                }
+            }
+        }
+    }
+}
+
+ReadURL();
