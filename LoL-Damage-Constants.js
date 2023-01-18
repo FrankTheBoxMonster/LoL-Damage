@@ -40,3 +40,12 @@ const DamageFilter = {
     Disabled: "Disabled",
     Irrelevant: "Irrelevant",
 }
+
+
+const DamageCustomTraits = {
+    EmpoweredAttack: "EmpoweredAttack",
+    SometimesZeroDamage: "SometimesZeroDamage",
+    AlwaysZeroDamage: "AlwaysZeroDamage",
+    NonZeroNonLethal: "NonZeroNonLethal",
+    AttackEffectsSpell: "AttackEffectsSpell",
+}

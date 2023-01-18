@@ -50,16 +50,19 @@ var filterTableHeader = filterTable.createTHead().insertRow(0);
 filterTableHeader.insertCell().appendChild(document.createTextNode("categories"));
 filterTableHeader.insertCell().appendChild(document.createTextNode("properties"));
 filterTableHeader.insertCell().appendChild(document.createTextNode("tags"));
+filterTableHeader.insertCell().appendChild(document.createTextNode("custom traits"));
 
 var filterTableRow = filterTable.insertRow();
 var categoriesFilterCell = filterTableRow.insertCell();
 var propertiesFilterCell = filterTableRow.insertCell();
 var tagsFilterCell = filterTableRow.insertCell();
+var traitsFilterCell = filterTableRow.insertCell();
 
 var damageFilterSettings = {
     categories: { },
     properties: { },
     tags: { },
+    traits: { },
 }
 
 for(var property in DamageProperty) {
@@ -68,6 +71,10 @@ for(var property in DamageProperty) {
 
 for(var tag in DamageTag) {
     damageFilterSettings.tags[tag] = CreateFilterCheckbox(tag, tagsFilterCell);
+}
+
+for(var trait in DamageCustomTraits) {
+    damageFilterSettings.traits[trait] = CreateFilterCheckbox(trait, traitsFilterCell);
 }
 
 
@@ -79,6 +86,7 @@ var tableHeaderConfig = [
     { name: "tags<br>enabled", width: "180px" },
     { name: "tags<br>disabled", width: "180px" },
     { name: "notes", width: "300px" },
+    { name: "custom traits", width: "300px" },
 ];
 
 var damageTableHeader = damageTable.createTHead().insertRow(0);
@@ -177,7 +185,33 @@ function BuildDamageRecordSet(category, records, namePrefix) {
         
         
         var notesCell = row.insertCell();
-        notesCell.innerHTML = record.notes ?? "";
+        record.notes = record.notes ?? "";
+        notesCell.innerHTML = record.notes;
+        
+        
+        record.customTraits = record.customTraits ?? {};
+        
+        var traitsText = "";
+        for(var trait in record.customTraits) {
+            var value = record.customTraits[trait];
+            if(traitsText != "") {
+                traitsText += "<br>";
+            }
+            
+            traitsText += trait + " = ";
+            if(value !== true && value !== false) {
+                value = "\"" + value + "\"";
+            }
+            
+            traitsText += value;
+        }
+        
+        
+        var traitsCell = row.insertCell();
+        traitsCell.innerHTML = traitsText;
+        if(traitsText != "") {
+            traitsCell.style.backgroundColor = Colors.Blue;
+        }
     }
 }
 
@@ -260,8 +294,22 @@ function UpdateFilters() {
             }
         );
         
+        var traitFilter = UpdateFilterGroup(damageFilterSettings.traits,
+            (name, show, filter) => {
+                var trait = record.customTraits[name];
+                var pass = false;
+                if(filter == true) {
+                    pass = (trait !== false && trait != undefined);
+                } else {
+                    pass = (trait === false);
+                }
+                
+                return (show ?? true) && pass;
+            }
+        );
         
-        var show = (nameFilter == true && categoryFilter == true && propertyFilter == true && tagFilter == true);
+        
+        var show = (nameFilter == true && categoryFilter == true && propertyFilter == true && tagFilter == true && traitFilter == true);
         if(show == true) {
             row.style.display = "";
             filterPassCount++;

@@ -241,6 +241,9 @@ var DamageSources = {
     "Ignite": {
       "application": {
         notes: "will trigger various effects otherwise confirmed to require Proc=0\n\nwill reset Teemo W, confirming Periodic=0 (normally zero damage is fine)",
+        customTraits: {
+          AlwaysZeroDamage: true,
+        },
         damageType: DamageType.True,
         damageInfo: {
           properties: {
@@ -789,6 +792,9 @@ var DamageSources = {
           damageInfo: DamageTemplate_Proc,
         },
         "second attack": {
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on attack, and sometimes a second time onhit (for a total of up to x3 times when combined with main attack), depending on which effects have been bugfixed or not",
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -922,6 +928,9 @@ var DamageSources = {
       "W": {
         "damage": {
           notes: "unknowable due to not causing death, but we can guess based on other interactions and history\n\nno spell effects are ever applied, ruling out ActiveSpell and Pet\n\nNeeko P will pop off, despite not doing so for other CC, ruling out Indirect\n\nElectrocute into Black Shield to negate the CC will not trigger, confirming Proc\n\nAery will trigger, which means if it is Proc then it can't also be Periodic\n\nManamune into Black Shield to negate the CC will not trigger, which rules out BasicAttack\n\nNonRedirectable and Item would be nonsensical and can be excluded on that principle\n\nthis leaves AOE, which while plausible, is not typically seen on any Proc damage (there are a handful of exceptions, but they are all on modern effects), so it can likely be excluded by that principle",
+          customTraits: {
+            AlwaysZeroDamage: true,
+          },
           damageType: DamageType.True,
           damageInfo: DamageTemplate_Proc,
         },
@@ -969,6 +978,9 @@ var DamageSources = {
         },
         "onhit": {
           notes: "can be forced to non-zero by Zyra plants",
+          customTraits: {
+            AlwaysZeroDamage: true,
+          },
           damageType: DamageType.Physical,
           damageInfo: {
             properties: PropertyTemplate_Attack,
@@ -1019,6 +1031,9 @@ var DamageSources = {
           damageInfo: DamageTemplate_SingleNontargetedSpell,
         },
         "followup attack": {
+          customTraits: {
+            EmpoweredAttack: true,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -1043,6 +1058,9 @@ var DamageSources = {
           },
         },
         "R followup attack": {
+          customTraits: {
+            EmpoweredAttack: true,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -1069,6 +1087,9 @@ var DamageSources = {
       },
       "Severum": {
         "Q": {
+          customTraits: {
+            AttackEffectsSpell: "stacks Energized and Kraken on each hit but nothing else",
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -1146,6 +1167,9 @@ var DamageSources = {
           damageInfo: DamageTemplate_AoeSpell,
         },
         "followup attack": {
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -1297,6 +1321,9 @@ var DamageSources = {
           damageInfo: DamageTemplate_AoeSpell,
         },
         "followup attack": {
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -1449,6 +1476,9 @@ var DamageSources = {
       "R": {
         "damage": {
           notes: "unknowable due to not causing death, but we can guess",
+          customTraits: {
+            AlwaysZeroDamage: true,
+          },
           damageType: DamageType.True,
           damageInfo: {
             properties: PropertyTemplate_Default,
@@ -1460,10 +1490,16 @@ var DamageSources = {
     "Belveth": {
       "Q": {
         "target": {
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_AttackSpell,
         },
         "aoe": {
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_AoeSpell,
         },
@@ -1476,6 +1512,9 @@ var DamageSources = {
       },
       "E": {
         "damage": {
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on each hit",
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_AttackSpell,
         },
@@ -2060,6 +2099,9 @@ var DamageSources = {
       "SpiderQ": {
         "damage": {
           notes: "call for help and onhit proc are from a separate instance handled first, dying to onhit proc denies the Q damage, onhit proc respects dodge",
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Magic,
           damageInfo: DamageTemplate_SingleNontargetedSpell,
         },
@@ -2090,6 +2132,9 @@ var DamageSources = {
       },
       "E": {
         "damage": {
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Magic,
           damageInfo: {
             properties: {
@@ -2139,6 +2184,9 @@ var DamageSources = {
     "Ezreal": {
       "Q": {
         "damage": {
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on hit",
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_AttackSpell,
         },
@@ -2209,6 +2257,9 @@ var DamageSources = {
       },
       "Q": {
         "damage": {
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_AttackSpell,
         },
@@ -2407,6 +2458,9 @@ var DamageSources = {
       },
       "Q": {
         "damage": {
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on hit",
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_AttackSpell,
         },
@@ -2562,10 +2616,16 @@ var DamageSources = {
     "Graves": {
       "P": {
         "attack first hit": {
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on the first target hit",
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
         "attack secondary hits": {
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack_NoOnHits,
         },
@@ -2999,6 +3059,9 @@ var DamageSources = {
       },
       "Q": {
         "champion": {
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_AttackSpell,
         },
@@ -3516,6 +3579,9 @@ var DamageSources = {
     "Katarina": {
       "P": {
         "damage": {
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Magic,
           damageInfo: {
             properties: {
@@ -3544,6 +3610,9 @@ var DamageSources = {
       },
       "E": {
         "damage": {
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Magic,
           damageInfo: {
             properties: {
@@ -3562,6 +3631,9 @@ var DamageSources = {
       "R": {
         "magic": {
           notes: "applies first each tick",
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on each hit",
+          },
           damageType: DamageType.Magic,
           damageInfo: {
             properties: {
@@ -3578,6 +3650,9 @@ var DamageSources = {
         },
         "physical": {
           notes: "applies second each tick\n\nalways dealt even if zero, as seen by Phage healing + Luden's + Trundle Q reduction to undo the Phage bonus AD, which will not double refund Luden's cd due to zero damage, but will still trigger Phage",
+          customTraits: {
+            SometimesZeroDamage: "this damage will evaluate to zero if you have zero bonus AD",
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_AoeDotSpell,
         },
@@ -3612,27 +3687,45 @@ var DamageSources = {
         },
         "active physical": {
           notes: "applies first",
+          customTraits: {
+            EmpoweredAttack: true,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
         "active magic": {
           notes: "applies second, can be 0 but always applies, denying spell effects that ignore 0 damage but allowing others through",
+          customTraits: {
+            SometimesZeroDamage: "this damage evaluates to zero against full health targets",
+          },
           damageType: DamageType.Magic,
           damageInfo: DamageTemplate_SingleNontargetedSpell,
         },
         "evolved physical target": {
+          customTraits: {
+            EmpoweredAttack: true,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
         "evolved magic target": {
+          customTraits: {
+            SometimesZeroDamage: "this damage evaluates to zero against full health targets",
+          },
           damageType: DamageType.Magic,
           damageInfo: DamageTemplate_SingleNontargetedSpell,
         },
         "evolved physical aoe": {
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_AoeAttack,
         },
         "evolved magic aoe": {
+          customTraits: {
+            SometimesZeroDamage: "this damage evaluates to zero against full health targets",
+          },
           damageType: DamageType.Magic,
           damageInfo: DamageTemplate_AoeSpell,
         },
@@ -4163,6 +4256,9 @@ var DamageSources = {
     "Lucian": {
       "P": {
         "attack": {
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on hit",
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -4460,6 +4556,9 @@ var DamageSources = {
     "MasterYi": {
       "P": {
         "attack": {
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on hit",
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -4467,6 +4566,9 @@ var DamageSources = {
       "Q": {
         "main hit": {
           notes: "missing call for help?",
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
           damageInfo: {
             properties: {
@@ -4482,6 +4584,9 @@ var DamageSources = {
           },
         },
         "repeat hit": {
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
           damageInfo: {
             properties: {
@@ -4515,11 +4620,17 @@ var DamageSources = {
       },
       "Q": {
         "first hit": {
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on hit",
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_AttackSpell,
         },
         "second hit": {
           notes: "unnecessary call for help?",
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_AttackSpell,
         },
@@ -5046,10 +5157,16 @@ var DamageSources = {
           damageInfo: DamageTemplate_SingleTargetedSpell,
         },
         "P primary hit": {
+          customTraits: {
+            EmpoweredAttack: true,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
         "P secondary hits": {
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -5479,22 +5596,37 @@ var DamageSources = {
       },
       "W": {
         "default first hit": {
+          customTraits: {
+            EmpoweredAttack: true,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
         "default second hit": {
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
         "empowered first hit": {
+          customTraits: {
+            EmpoweredAttack: true,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
         "empowered second hit": {
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
         "empowered third hit": {
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -5517,6 +5649,16 @@ var DamageSources = {
       },
     },
     "Rengar": {
+      "P": {
+        "attack": {
+          customTraits: {
+            EmpoweredAttack: true,
+            AttackEffectsSpell: "triggers attack effects on hit",
+          },
+          damageType: DamageType.Physical,
+          damageInfo: DamageTemplate_InternalRaw,
+        },
+      },
       "Q": {
         "attack": {
           notes: "passive leap and stacks make no difference, ult bonus damage is considered the same instance as the triggering attack (benefits from lifesteal but not crit)",
@@ -5810,6 +5952,9 @@ var DamageSources = {
       "Q": {
         "target champion": {
           notes: "no call for help?  also distinguishes the target from the AOE, unlike Lucian Q?  this is likely why PTA is able to work nicely on her too",
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on first champion hit",
+          },
           damageType: DamageType.Physical,
           damageInfo: {
             properties: {
@@ -6118,11 +6263,17 @@ var DamageSources = {
     "Shyvana": {
       "HumanQ": {
         "first hit": {
+          customTraits: {
+            EmpoweredAttack: true,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
         "second hit": {
           notes: "only second hit counts as spell for some reason (only 0.5s Luden's refund)",
+          customTraits: {
+            EmpoweredAttack: true,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_AttackSpell,
         },
@@ -6130,20 +6281,35 @@ var DamageSources = {
       "DragonQ": {
         "first hit target": {
           notes: "if the main target is at 1 PTA stack, then it'll trigger PTA on that target, otherwise it'll bounce around until a random aoe target other than the main target is left with 1 PTA stack, implying either the second aoe hit never applies PTA, or the main target is special cased when on 1 stack to always apply the remaining 2 stacks instantly, bork passive proc will trigger on an aoe target if they are at two bork stacks before triggering on a main target at one bork stack, implying that PTA is probably just special cased when the target is at 1 PTA stack",
+          customTraits: {
+            EmpoweredAttack: true,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_AttackSpell,
         },
         "first hit aoe": {
           notes: "never counts as aoe, so PTA can be bounced around a lot",
+          customTraits: {
+            EmpoweredAttack: true,
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_AttackSpell,
         },
         "second hit target": {
+          customTraits: {
+            EmpoweredAttack: true,
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_AttackSpell,
         },
         "second hit aoe": {
           notes: "never counts as aoe, so PTA can be bounced around a lot",
+          customTraits: {
+            EmpoweredAttack: true,
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_AttackSpell,
         },
@@ -6929,8 +7095,18 @@ var DamageSources = {
         },
       },
       "R": {
-        "damage": {
+        "target": {
+          customTraits: {
+            EmpoweredAttack: true,
+          },
+          damageType: DamageType.Physical,
+          damageInfo: DamageTemplate_Attack,
+        },
+        "aoe": {
           notes: "never counts as AOE regardless of first vs second hit or targeted vs untargeted hit, yet is still special cased to apply PTA only to a targeted hit",
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -7038,6 +7214,9 @@ var DamageSources = {
       },
       "W": {
         "damage": {
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on each attack",
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -7305,10 +7484,16 @@ var DamageSources = {
           damageInfo: DamageTemplate_Proc_WithLifesteal,
         },
         "mark hit 1": {
+          customTraits: {
+            EmpoweredAttack: true,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
         "mark hit 2": {
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -7330,6 +7515,9 @@ var DamageSources = {
       },
       "R": {
         "target": {
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_AttackSpell,
         },
@@ -7431,6 +7619,9 @@ var DamageSources = {
       },
       "Q": {
         "attack melee": {
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on hit",
+          },
           damageType: DamageType.Physical,
           damageInfo: {
             properties: {
@@ -7446,6 +7637,9 @@ var DamageSources = {
           },
         },
         "attack leap": {
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on hit",
+          },
           damageType: DamageType.Physical,
           damageInfo: {
             properties: {
@@ -7463,6 +7657,9 @@ var DamageSources = {
       },
       "W": {
         "default": {
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on hit",
+          },
           damageType: DamageType.Physical,
           damageInfo: {
             properties: {
@@ -7478,6 +7675,9 @@ var DamageSources = {
           },
         },
         "empowered": {
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on hit",
+          },
           damageType: DamageType.Physical,
           damageInfo: {
             properties: {
@@ -7520,6 +7720,9 @@ var DamageSources = {
       },
       "Q": {
         "damage": {
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on cast start",
+          },
           damageType: DamageType.Magic,
           damageInfo: DamageTemplate_AttackSpell,
         },
@@ -7527,6 +7730,9 @@ var DamageSources = {
       "R": {
         "onhit tick": {
           notes: "dealt on ticks 1 / 3 / 5 out of six total ticks, equal to 2/9ths of the total damage",
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on each hit (x3 total)",
+          },
           damageType: DamageType.Magic,
           damageInfo: DamageTemplate_AttackSpell,
         },
@@ -7749,6 +7955,9 @@ var DamageSources = {
     "Yasuo": {
       "Q": {
         "primary target": {
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on first target hit",
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -7774,6 +7983,9 @@ var DamageSources = {
           damageInfo: DamageTemplate_SingleTargetedSpell,
         },
         "Q primary target": {
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on first target hit",
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -7818,6 +8030,9 @@ var DamageSources = {
       },
       "Q": {
         "primary target": {
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on first target hit",
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -8145,6 +8360,9 @@ var DamageSources = {
       },
       "Q": {
         "first hit": {
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on first target hit",
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -8168,6 +8386,9 @@ var DamageSources = {
       },
       "E": {
         "first target first hit": {
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on first target hit",
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -8212,6 +8433,9 @@ var DamageSources = {
           damageInfo: DamageTemplate_Proc,
         },
         "Q first hit": {
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on first target hit",
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -8220,6 +8444,9 @@ var DamageSources = {
           damageInfo: DamageTemplate_Attack_NoOnHits,
         },
         "E first target first hit": {
+          customTraits: {
+            AttackEffectsSpell: "triggers attack effects on first target hit",
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -8914,6 +9141,9 @@ var DamageSources = {
     "Guinsoo's Rageblade": {
       "phantom hit": {
         notes: "can be forced to 1 by Gangplank barrels, but is not allowed to be lethal, even by enemies\n\nwill attempt to trigger vs Zyra plants, but result in no damage, confirming BasicAttack=0?\n\nwill not trigger Ocean Soul healing or Challenging Smite dot, despite Ignite application doing both, confirming Proc=1?\n\ncan also be forced to non-zero by Nidalee traps (and possibly others), but still cannot be lethal (might have EnableKill=0?)\n\nattempts to deal 1 to Yorick W but the damage gets redistributed elsewhere so no death is triggered with this damage despite the floating text",
+        customTraits: {
+          AlwaysZeroDamage: true,
+        },
         damageType: DamageType.Magic,
         damageInfo: {
           properties: {
