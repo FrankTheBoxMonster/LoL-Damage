@@ -49,3 +49,17 @@ const DamageCustomTraits = {
     NonZeroNonLethal: "NonZeroNonLethal",
     AttackEffectsSpell: "AttackEffectsSpell",
 }
+
+
+const DamageImmunityFlag = {
+    ZeroDamage: "ZeroDamage",
+    FullyShieldedDamage: "FullyShieldedDamage",
+    InvulnDamage: "InvulnDamage",
+}
+
+const DamageImmunityValue = {
+    Allowed: "Allowed",
+    Ignored: "Ignored",
+    Irrelevant: "Irrelevant",
+    Unknown: "Unknown",
+}

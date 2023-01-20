@@ -97,6 +97,8 @@ for(var headerConfig of tableHeaderConfig) {
 }
 
 
+var DamageSourcesLookup = { };
+
 for(var categoryName in DamageSources) {
     //damageFilterSettings.categories[categoryName] = CreateFilterCheckbox(categoryName, categoriesFilterCell);
     
@@ -136,9 +138,20 @@ function BuildDamageRecordSet(category, records, namePrefix) {
         
         record.category = category;
         record.fullName = namePrefix + recordName;
+        DamageSourcesLookup[record.fullName] = record;
+        
         
         var nameCell = row.insertCell();
-        nameCell.innerHTML = record.fullName;
+        record.showTriggersCheckbox = document.createElement("input");
+        record.showTriggersCheckbox.type = "checkbox";
+        record.showTriggersCheckbox.style.marginLeft = "0px";
+        record.showTriggersCheckbox.checked = false;
+        record.showTriggersCheckbox.indeterminate = true;
+        record.showTriggersCheckbox.damageRecord = record;
+        nameCell.appendChild(record.showTriggersCheckbox);
+        
+        var nameText = document.createTextNode(record.fullName);
+        nameCell.appendChild(nameText);
         
         
         var damageTypeCell = row.insertCell();
@@ -212,6 +225,35 @@ function BuildDamageRecordSet(category, records, namePrefix) {
         if(traitsText != "") {
             traitsCell.style.backgroundColor = Colors.Blue;
         }
+        
+        
+        
+        record.triggersRow = damageTable.insertRow();
+        record.triggersRow.style.display = "none";
+        
+        record.allowedTriggersCell = record.triggersRow.insertCell();
+        record.allowedTriggersCell.colSpan = 4;
+        
+        record.ignoredTriggersCell = record.triggersRow.insertCell();
+        record.ignoredTriggersCell.colSpan = 4;
+        
+        record.showTriggersCheckbox.clickCount = 0;
+        record.showTriggersCheckbox.addEventListener("change", (event) => {
+            var record = event.currentTarget.damageRecord;
+            record.showTriggersCheckbox.clickCount++;
+            if(record.showTriggersCheckbox.clickCount % 2 == 1) {
+                record.showTriggersCheckbox.checked = true;
+                record.showTriggersCheckbox.indeterminate = false;
+                record.triggersRow.style.display = "";
+            } else {
+                record.showTriggersCheckbox.indeterminate = true;
+                record.triggersRow.style.display = "none";
+            }
+            
+            if(record.allowedTriggers == undefined) {
+                CheckTriggers(record);
+            }
+        });
     }
 }
 
@@ -313,8 +355,15 @@ function UpdateFilters() {
         if(show == true) {
             row.style.display = "";
             filterPassCount++;
+            
+            if(record.showTriggersCheckbox.checked == true) {
+                record.triggersRow.style.display = "";
+            } else {
+                record.triggersRow.style.display = "none";
+            }
         } else {
             row.style.display = "none";
+            record.triggersRow.style.display = "none";
         }
     }
     
@@ -356,12 +405,13 @@ function UpdateFilterGroup(filters, checkFilterCallback) {
 }
 
 function CreateFilterCheckbox(name, parentCell) {
-    var text = document.createTextNode(name);
-    parentCell.appendChild(text);
-    
     var checkbox = document.createElement("input");
     checkbox.type = "checkbox";
+    checkbox.style.marginLeft = "0px";
     parentCell.appendChild(checkbox);
+    
+    var text = document.createTextNode(name);
+    parentCell.appendChild(text);
     
     parentCell.appendChild(document.createElement("br"));
     
@@ -500,3 +550,23 @@ function ReadURL() {
 }
 
 ReadURL();
+
+
+
+
+var testDamagePaths = [
+    "Ashe Q secondary bolt",
+    "Anivia W damage",
+    "Kayle E active magic",
+];
+
+testDamagePaths = Object.keys(DamageSourcesLookup);
+
+function CheckAllTriggers() {
+    for(var path of testDamagePaths) {
+        var damageRecord = DamageSourcesLookup[path];
+        CheckTriggers(damageRecord);
+    }
+}
+
+//CheckAllTriggers();
