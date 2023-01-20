@@ -712,13 +712,13 @@ function CheckTriggers(damageRecord) {
     if(checkTriggersDebug == true) {
         console.log(log);
     } else {
-        ApplyTriggersToCells(damageRecord.allowedTriggersCell, damageRecord.allowedTriggers);
-        ApplyTriggersToCells(damageRecord.ignoredTriggersCell, damageRecord.ignoredTriggers);
+        ApplyTriggersToCells("ALLOWED TRIGGERS", damageRecord.allowedTriggersCell, damageRecord.allowedTriggers);
+        ApplyTriggersToCells("IGNORED TRIGGERS", damageRecord.ignoredTriggersCell, damageRecord.ignoredTriggers);
     }
 }
 
-function ApplyTriggersToCells(cell, triggers) {
-    cell.innerHTML = "";
+function ApplyTriggersToCells(prefix, cell, triggers) {
+    cell.innerHTML = "<b><u>" + prefix + ":</u></b>\n\n";
     for(var trigger in triggers) {
         if(cell.innerHTML != "") {
             cell.innerHTML += "\n";
