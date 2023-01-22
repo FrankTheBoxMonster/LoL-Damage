@@ -13,4 +13,51 @@ th, td {
     text-align: left;
     vertical-align: bottom;
     padding: 5px;
+    height: 1px;  // this lets the trigger containers inherit the full height so that small contents form a single column instead of several
+}
+
+
+.tooltip {
+  position: relative;
+  display: inline;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: max-content;
+  max-width: 500px;
+  background-color: #555;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 5px 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+.triggersContainer {
+    column-count: 3;
+    column-gap: 20px;
+    column-fill: auto;
+    height: 100%;
+}
+
+.triggersHeader {
+    column-span: all;
+}
+
+.triggersCategory {
+    margin-bottom: 40px;
+    break-inside: avoid;
 }

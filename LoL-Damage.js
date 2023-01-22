@@ -233,9 +233,11 @@ function BuildDamageRecordSet(category, records, namePrefix) {
         
         record.allowedTriggersCell = record.triggersRow.insertCell();
         record.allowedTriggersCell.colSpan = 4;
+        record.allowedTriggersCell.style.verticalAlign = "top";
         
         record.ignoredTriggersCell = record.triggersRow.insertCell();
         record.ignoredTriggersCell.colSpan = 4;
+        record.ignoredTriggersCell.style.verticalAlign = "top";
         
         record.showTriggersCheckbox.clickCount = 0;
         record.showTriggersCheckbox.addEventListener("change", (event) => {

@@ -224,7 +224,7 @@ var TriggerTemplates = {
             
             if(data.name == "Lucian R damage") {
                 data.canTrigger = false;
-                data.specialNotes = "special case, tagged as Periodic yet still triggers wakeup unlike other spells, possibly because it's seen more like a bunch of single target skillshots rather than an applied dot or something that might accidentally trigger wakeup, yet still counts as Periodic for other effects";
+                data.specialNotes = "special case, Lucian R is tagged as Periodic yet still triggers wakeup unlike other spells, possibly because it's seen more like a bunch of single target skillshots rather than an applied dot or something that might accidentally trigger wakeup, yet still counts as Periodic for other effects";
             }
         }
     },
@@ -240,10 +240,7 @@ var DamageTriggers = {
     },
     
     "runes": {
-        "Press the Attack stacks": TriggerTemplates.UnknownOutgoing,
         "Press the Attack amp": TriggerTemplates.UnknownIncoming,
-        "Lethal Tempo": TriggerTemplates.UnknownOutgoing,
-        "Fleet Footwork": TriggerTemplates.UnknownOutgoing,
         "Conqueror": {
             Immunity: ImmunityTemplates.PreApply,
             Event: DamageEvent.UnknownOutgoing,
@@ -264,7 +261,6 @@ var DamageTriggers = {
             Event: DamageEvent.UnknownOutgoing,  // is this actually OnDeal or is it OnTake?
             Function: FunctionTemplates.PetOrNonProc,
         },
-        "Hail of Blades": TriggerTemplates.UnknownOutgoing,
         "Cheap Shot": {
             Immunity: ImmunityTemplates.NonZero,
             Event: DamageEvent.UnknownOutgoing,
@@ -314,49 +310,18 @@ var DamageTriggers = {
             Function: FunctionTemplates.SpellOrPet,
         },
         "Scorch": TriggerTemplates.DealAnyNonProcDamage,
-        "Grasp of the Undying": TriggerTemplates.DealOnHitNonDamage,
-        "Demolish": TriggerTemplates.DealOnHitNonDamage,
-        "Font of Life": {
-            Immunity: ImmunityTemplates.Unknown,
-            Event: DamageEvent.UnknownIncoming,
-            LowInterest: InterestTemplates.OnHit,
-            Function: FunctionTemplates.OnHit,
-        },
-        "Shield Bash": TriggerTemplates.DealOnHitNonDamage,
         "Second Wind": TriggerTemplates.TakeAnyDamagePostApply,
         "Bone Plating": TriggerTemplates.UnknownIncoming,
         "First Strike": TriggerTemplates.DealAnyDamagePreApply,
     },
     
     "items": {
-        "Cull": TriggerTemplates.DealOnHitNonDamage,
-        "Starting Item onhit": {
-            Immunity: {
-                ZeroDamage: DamageImmunityValue.Allowed,
-                FullyShieldedDamage: DamageImmunityValue.Unknown,
-                InvulnDamage: DamageImmunityValue.Irrelevant,
-            },
-            Event: DamageEvent.UnknownOutgoing,
-            LowInterest: InterestTemplates.OnHit,
-            Function: FunctionTemplates.OnHit,
-        },
         "Doran's Ring regen": TriggerTemplates.DealAnyDamagePreApply,
         "Doran's Shield regen": TriggerTemplates.TakeAnyDamagePostApply,
         "Jungle pet attacks": TriggerTemplates.UnknownOutgoing,
         "Scorchclaw passive": TriggerTemplates.DealAnyNonProcDamage,
         "Guardian's Horn regen": TriggerTemplates.UnknownIncoming,
         "Ultbook Attack-Smite": TriggerTemplates.UnknownOutgoing,
-        "Support Item execute": {
-            Immunity: {
-                ZeroDamage: DamageImmunityValue.Allowed,
-                FullyShieldedDamage: DamageImmunityValue.Unknown,
-                InvulnDamage: DamageImmunityValue.Ignored,
-            },
-            Event: DamageEvent.UnknownOutgoing,
-            LowInterest: InterestTemplates.OnHit,
-            GeneralNotes: "the execute itself does not go through invuln, and the damage does not consume a charge on its own, it only assists in killing the minion, with any confirmed minion kills consuming a charge",
-            Function: FunctionTemplates.OnHit,
-        },
         "Support Item poke": {
             Immunity: ImmunityTemplates.NonZero,
             Event: DamageEvent.UnknownOutgoing,
@@ -387,31 +352,10 @@ var DamageTriggers = {
             }
         },
         
-        "Plated Steelcaps": {
-            Immunity: ImmunityTemplates.DamageMultiplier,
-            Event: DamageEvent.UnknownIncoming,
-            LowInterest: InterestTemplates.OnHit,
-            Function: function(data) {
-                data.canTrigger = (data.tags.BasicAttack == true && data.tags.ActiveSpell == false && data.tags.Pet == false);
-                if(data.tags.BasicAttack == true && data.tags.ActiveSpell == true) {
-                    data.specialNotes = "bugged to not be reduced";
-                }
-            }
-        },
-        
-        "Sheen": TriggerTemplates.DealOnHitNonDamage,
-        "Bramble Vest": TriggerTemplates.Thornmail,
         "Catalyst of Aeons": TriggerTemplates.CatalystPassive,
         "Executioner's Calling": TriggerTemplates.ExecutionersCalling,
-        "Hearthbound Axe": TriggerTemplates.DealOnHitNonDamage,
         "Hextech Alternator": TriggerTemplates.DealAnyDamagePreApply,
         "Kircheis Shard": TriggerTemplates.UnknownOutgoing,
-        "Noonquiver": {
-            Immunity: ImmunityTemplates.OnHitDamage,
-            Event: DamageEvent.UnknownOutgoing,
-            LowInterest: InterestTemplates.OnHit,
-            Function: FunctionTemplates.BasicAttackAndOnHit,
-        },
         "OblivionOrb": TriggerTemplates.OblivionOrb,
         "Phage": {
             Immunity: ImmunityTemplates.PreApply,
@@ -419,15 +363,9 @@ var DamageTriggers = {
             LowInterest: InterestTemplates.AlwaysLow,
             Function: FunctionTemplates.AnyPhysicalDamage,
         },
-        "Rageknife": TriggerTemplates.DealOnHitDamage,
-        "Recurve Bow": TriggerTemplates.DealOnHitDamage,
         "Spectre's Cowl": TriggerTemplates.TakeAnyDamagePostApply,
-        "Tiamat": TriggerTemplates.DealOnHitNonDamage,
-        "Warden's Mail": TriggerTemplates.WardensMail,
         
         "Abyssal Mask": TriggerTemplates.CatalystPassive,
-        "Ardent Censer": TriggerTemplates.DealOnHitDamage,
-        "Blade of the Ruined King stacks/proc": TriggerTemplates.DealOnHitNonDamage,
         "Chempunk Chainsword": TriggerTemplates.ExecutionersCalling,
         "Chemtech Putrifier passive": TriggerTemplates.OblivionOrb,
         "Chemtech Putrifier proc": TriggerTemplates.DealAnyDamagePostApply,
@@ -438,9 +376,7 @@ var DamageTriggers = {
                 data.canTrigger = (data.tags.ActiveSpell == true || data.tags.BasicAttack == true);
             }
         },
-        "Dead Man's Plate": TriggerTemplates.DealOnHitNonDamage,
         "Demonic Embrace": TriggerTemplates.DealSpellEffects,
-        "Essence Reaver": TriggerTemplates.DealOnHitNonDamage,
         "Force of Nature stacking": TriggerTemplates.UnknownIncoming,
         "Force of Nature reduction": {
             Immunity: ImmunityTemplates.DamageMultiplier,
@@ -448,18 +384,8 @@ var DamageTriggers = {
             LowInterest: InterestTemplates.AlwaysLow,
             Function: FunctionTemplates.AnyMagicDamage,
         },
-        "Frozen Heart": TriggerTemplates.WardensMail,
         "Gargoyle Stoneplate": TriggerTemplates.TakeAnyDamagePreApply,
-        "Guinsoo's Rageblade stacks/onhit": TriggerTemplates.UnknownOutgoing,
         "Horizon Focus": TriggerTemplates.UnknownOutgoing,
-        "Hullbreaker": {
-            Immunity: ImmunityTemplates.DamageMultiplier,
-            Event: DamageEvent.UnknownOutgoing,
-            LowInterest: InterestTemplates.OnHit,
-            Function: function(data) {
-                data.canTrigger = (data.tags.BasicAttack == true && data.tags.Proc == false);
-            }
-        },
         "Knight's Vow": {
             Immunity: ImmunityTemplates.DamageMultiplier,
             Event: DamageEvent.UnknownIncoming,
@@ -469,7 +395,6 @@ var DamageTriggers = {
                 data.canTrigger = (data.type != DamageType.True && data.tags.NonRedirectable == false);
             }
         },
-        "Lich Bane": TriggerTemplates.DealOnHitNonDamage,
         "Manamune": {
             Immunity: ImmunityTemplates.PreApply,
             Event: DamageEvent.UnknownOutgoing,
@@ -479,7 +404,6 @@ var DamageTriggers = {
         },
         "Morellonomicon": TriggerTemplates.OblivionOrb,
         "Mortal Reminder passive": TriggerTemplates.ExecutionersCalling,
-        "Mortal Reminder stacking": TriggerTemplates.UnknownOutgoing,
         "Muramana": {
             Immunity:  ImmunityTemplates.OnHitDamage,
             Event: DamageEvent.UnknownOutgoing,
@@ -487,11 +411,10 @@ var DamageTriggers = {
                 data.canTrigger = ((data.tags.ActiveSpell == true || data.properties.TriggerOnHitEvents == true) && data.tags.Proc == false);
             }
         },
-        "Nashor's Tooth": TriggerTemplates.DealOnHitNonDamage,
-        "Navori Quickblades": {
+        "Navori Quickblades amp": {
             Immunity: ImmunityTemplates.DamageMultiplier,
             Event: DamageEvent.UnknownOutgoing,
-            GeneralNotes: "only PQWER slots work, no summoners / items / runes\nunclear if pet amps are intentional or not, as all pets in practice also have the intended tags",
+            GeneralNotes: "only PQWER slots work, no summoners / items / runes\nunclear if pet amps are intentional or not, as all pets in practice also have the intended tags\nempowered attacks only work if they would apply spell effects",
             Function: function(data) {
                 var validSlot = (data.category == "champions");
                 data.canTrigger = ((data.tags.ActiveSpell == true || data.tags.Proc == true) && validSlot == true);
@@ -501,10 +424,6 @@ var DamageTriggers = {
                 }
             }
         },
-        "Phantom Dancer": TriggerTemplates.UnknownOutgoing,
-        "Randuin's Omen (Rock Solid)": TriggerTemplates.WardensMail,
-        "Randuin's Omen (crit reduction)": TriggerTemplates.UnknownIncoming,
-        "Rapid Firecannon": TriggerTemplates.UnknownOutgoing,
         "Ravenous Hydra": {
             Immunity: ImmunityTemplates.PreApply,
             Event: DamageEvent.UnknownOutgoing,
@@ -512,7 +431,6 @@ var DamageTriggers = {
                 data.canTrigger = ((data.tags.ActiveSpell == true || data.tags.Pet == true || (data.tags.BasicAttack == true && data.properties.TriggerOnHitEvents == true)) && data.tags.Item == false);
             }
         },
-        "Runaan's Hurricane": TriggerTemplates.UnknownOutgoing,
         "Rylai's Crystal Scepter": TriggerTemplates.DealSpellEffects,
         "Serpent's Fang": {
             Immunity: {
@@ -538,10 +456,6 @@ var DamageTriggers = {
             LowInterest: InterestTemplates.AlwaysLow,
             Function: FunctionTemplates.AnyDamage,
         },
-        "Thornmail": TriggerTemplates.Thornmail,
-        "Titanic Hydra": TriggerTemplates.DealOnHitNonDamage,
-        "Winter's Approach": TriggerTemplates.UnknownOutgoing,
-        "Wit's End": TriggerTemplates.DealOnHitNonDamage,
         "Zeke's Convergence": {
             Immunity: ImmunityTemplates.Unknown,
             Event: DamageEvent.UnknownOutgoing,
@@ -554,8 +468,6 @@ var DamageTriggers = {
             LowInterest: InterestTemplates.AlwaysLow,
             Function: FunctionTemplates.AnyDamage,
         },
-        "Divine Sunderer": TriggerTemplates.DealOnHitNonDamage,
-        "Duskblade of Draktharr": TriggerTemplates.DealOnHitNonDamage,
         "Eclipse": TriggerTemplates.DealAnyNonProcDamage,
         "Evenshroud": {
             Immunity: {
@@ -567,10 +479,7 @@ var DamageTriggers = {
             LowInterest: InterestTemplates.AlwaysLow,
             Function: FunctionTemplates.AnyDamage,
         },
-        "Heartsteel": TriggerTemplates.DealOnHitNonDamage,
-        "Iceborn Gauntlet": TriggerTemplates.DealOnHitNonDamage,
         "Imperial Mandate detonate": TriggerTemplates.TakeAnyDamagePreApply,
-        "Kraken Slayer": TriggerTemplates.UnknownOutgoing,
         "Liandry's Anguish": TriggerTemplates.DealSpellEffects,
         "Luden's Echo proc/refund": {
             Immunity: ImmunityTemplates.PostApply,
@@ -591,16 +500,9 @@ var DamageTriggers = {
             Function: FunctionTemplates.AnyDamage,
         },
         "Rod of Ages": TriggerTemplates.CatalystPassive,
-        "Trinity Force stacks/proc": TriggerTemplates.DealOnHitNonDamage,
     },
     
     "systems": {
-        "Red Buff dot": {
-            Immunity: ImmunityTemplates.PreApply,
-            Event: DamageEvent.UnknownOutgoing,
-            LowInterest: InterestTemplates.OnHit,
-            Function: FunctionTemplates.OnHit,
-        },
         "Hextech Dragon Soul proc": {
             Immunity: ImmunityTemplates.PreApply,
             Event: DamageEvent.UnknownOutgoing,
@@ -624,6 +526,109 @@ var DamageTriggers = {
             Function: FunctionTemplates.AnyDamage,
         },
         "Ward / Trap / Plant damage": TriggerTemplates.UnknownIncoming,
+        "in combat (outgoing)": TriggerTemplates.DealAnyDamagePreApply,
+        "in combat (incoming)": TriggerTemplates.TakeAnyDamagePreApply,
+    },
+    
+    "onhits (runes)": {
+        "Press the Attack stacks": TriggerTemplates.UnknownOutgoing,
+        "Grasp of the Undying": TriggerTemplates.DealOnHitNonDamage,
+        "Demolish": TriggerTemplates.DealOnHitNonDamage,
+        "Font of Life": {
+            Immunity: ImmunityTemplates.Unknown,
+            Event: DamageEvent.UnknownIncoming,
+            LowInterest: InterestTemplates.OnHit,
+            Function: FunctionTemplates.OnHit,
+        },
+        "Shield Bash": TriggerTemplates.DealOnHitNonDamage,
+    },
+    "onhits (items)": {        
+        "Cull": TriggerTemplates.DealOnHitNonDamage,
+        "Starting Item onhit": {
+            Immunity: {
+                ZeroDamage: DamageImmunityValue.Allowed,
+                FullyShieldedDamage: DamageImmunityValue.Unknown,
+                InvulnDamage: DamageImmunityValue.Irrelevant,
+            },
+            Event: DamageEvent.UnknownOutgoing,
+            LowInterest: InterestTemplates.OnHit,
+            Function: FunctionTemplates.OnHit,
+        },
+        "Support Item execute": {
+            Immunity: {
+                ZeroDamage: DamageImmunityValue.Allowed,
+                FullyShieldedDamage: DamageImmunityValue.Unknown,
+                InvulnDamage: DamageImmunityValue.Ignored,
+            },
+            Event: DamageEvent.UnknownOutgoing,
+            LowInterest: InterestTemplates.OnHit,
+            GeneralNotes: "the execute itself does not go through invuln, and the damage does not consume a charge on its own, it only assists in killing the minion, with any confirmed minion kills consuming a charge",
+            Function: FunctionTemplates.OnHit,
+        },
+        
+        "Plated Steelcaps": {
+            Immunity: ImmunityTemplates.DamageMultiplier,
+            Event: DamageEvent.UnknownIncoming,
+            LowInterest: InterestTemplates.OnHit,
+            Function: function(data) {
+                data.canTrigger = (data.tags.BasicAttack == true && data.tags.ActiveSpell == false && data.tags.Pet == false);
+                if(data.tags.BasicAttack == true && data.tags.ActiveSpell == true) {
+                    data.specialNotes = "bugged to not be reduced";
+                }
+            }
+        },
+        
+        "Sheen": TriggerTemplates.DealOnHitNonDamage,
+        "Bramble Vest": TriggerTemplates.Thornmail,
+        "Hearthbound Axe": TriggerTemplates.DealOnHitNonDamage,
+        "Noonquiver": {
+            Immunity: ImmunityTemplates.OnHitDamage,
+            Event: DamageEvent.UnknownOutgoing,
+            LowInterest: InterestTemplates.OnHit,
+            Function: FunctionTemplates.BasicAttackAndOnHit,
+        },
+        "Rageknife": TriggerTemplates.DealOnHitDamage,
+        "Recurve Bow": TriggerTemplates.DealOnHitDamage,
+        "Tiamat": TriggerTemplates.DealOnHitNonDamage,
+        "Warden's Mail": TriggerTemplates.WardensMail,
+        
+        "Ardent Censer": TriggerTemplates.DealOnHitDamage,
+        "Blade of the Ruined King onhit": TriggerTemplates.DealOnHitNonDamage,
+        "Blade of the Ruined King cooldown": TriggerTemplates.DealOnHitNonDamage,
+        "Dead Man's Plate": TriggerTemplates.DealOnHitNonDamage,
+        "Essence Reaver": TriggerTemplates.DealOnHitNonDamage,
+        "Frozen Heart": TriggerTemplates.WardensMail,
+        "Guinsoo's Rageblade onhit": TriggerTemplates.DealOnHitDamage,
+        "Hullbreaker": {
+            Immunity: ImmunityTemplates.DamageMultiplier,
+            Event: DamageEvent.UnknownOutgoing,
+            LowInterest: InterestTemplates.OnHit,
+            Function: function(data) {
+                data.canTrigger = (data.tags.BasicAttack == true && data.tags.Proc == false);
+            }
+        },
+        "Lich Bane": TriggerTemplates.DealOnHitNonDamage,
+        "Nashor's Tooth": TriggerTemplates.DealOnHitNonDamage,
+        "Randuin's Omen (Rock Solid)": TriggerTemplates.WardensMail,
+        "Randuin's Omen (crit reduction)": TriggerTemplates.UnknownIncoming,
+        "Thornmail": TriggerTemplates.Thornmail,
+        "Titanic Hydra": TriggerTemplates.DealOnHitNonDamage,
+        "Winter's Approach": TriggerTemplates.UnknownOutgoing,
+        "Wit's End": TriggerTemplates.DealOnHitNonDamage,
+        
+        "Divine Sunderer": TriggerTemplates.DealOnHitNonDamage,
+        "Duskblade of Draktharr": TriggerTemplates.DealOnHitNonDamage,
+        "Heartsteel": TriggerTemplates.DealOnHitNonDamage,
+        "Iceborn Gauntlet": TriggerTemplates.DealOnHitNonDamage,
+        "Trinity Force stacks/proc": TriggerTemplates.DealOnHitNonDamage,
+    },
+    "onhits (systems)": {
+        "Red Buff dot": {
+            Immunity: ImmunityTemplates.PreApply,
+            Event: DamageEvent.UnknownOutgoing,
+            LowInterest: InterestTemplates.OnHit,
+            Function: FunctionTemplates.OnHit,
+        },
         "Herald Eye pop": {
             Immunity: {
                 ZeroDamage: DamageImmunityValue.Allowed,
@@ -634,8 +639,25 @@ var DamageTriggers = {
             LowInterest: InterestTemplates.OnHit,
             Function: FunctionTemplates.OnHit,
         },
-        "in combat (outgoing)": TriggerTemplates.DealAnyDamagePreApply,
-        "in combat (incoming)": TriggerTemplates.TakeAnyDamagePreApply,
+    },
+    
+    "attack effects (runes)": {
+        "Lethal Tempo": TriggerTemplates.UnknownOutgoing,
+        "Fleet Footwork": TriggerTemplates.UnknownOutgoing,
+        "Hail of Blades": TriggerTemplates.UnknownOutgoing,
+    },
+    "attack effects (items)": {
+        "Kircheis Shard": TriggerTemplates.UnknownOutgoing,
+        
+        "Guinsoo's Rageblade phantom hit": TriggerTemplates.UnknownOutgoing,
+        "Mortal Reminder stacking": TriggerTemplates.UnknownOutgoing,
+        "Navori Quickblades refund": TriggerTemplates.UnknownOutgoing,
+        "Phantom Dancer": TriggerTemplates.UnknownOutgoing,
+        "Rapid Firecannon": TriggerTemplates.UnknownOutgoing,
+        "Runaan's Hurricane": TriggerTemplates.UnknownOutgoing,
+        "Stormrazor": TriggerTemplates.UnknownOutgoing,
+        
+        "Kraken Slayer": TriggerTemplates.UnknownOutgoing,
     },
     
     "champions": {
@@ -832,15 +854,16 @@ function CheckTriggers(damageRecord) {
                 fullNotes = "this damage does not trigger any other damage events";
             }
             
+            fullNotes = fullNotes.replaceAll("\n", "\n\n");
             
-            var string = "<b>" + triggerName + "</b>";
+            
+            var string = triggerName;
             
             if(fullNotes != "") {
-                string += "\n" + fullNotes;
+                string += " <div class=\"tooltip\"><b>?</b><span class=\"tooltiptext\">" + fullNotes + "</span></div>";
             }
             
             
-            string = string.replaceAll("\n", "\n    ");
             
             var lowInterestFunction = trigger.LowInterest ?? InterestTemplates.AlwaysHigh;
             var isLowInterest = lowInterestFunction(data);
@@ -862,20 +885,32 @@ function CheckTriggers(damageRecord) {
     ApplyTriggersToCells("IGNORED TRIGGERS", damageRecord.ignoredTriggersCell, damageRecord.ignoredTriggers);
 }
 
-function ApplyTriggersToCells(prefix, cell, triggers) {
-    cell.innerHTML = "<b><u>" + prefix + ":</u></b>";
+function ApplyTriggersToCells(prefix, cell, triggers, maxColumnSize) {
+    var text = "<div class=\"triggersContainer\">";
+    text += "<div class=\"triggersHeader\"><b><u>" + prefix + ":</u></b>\n\n\n</div>";
+    
     for(var category in triggers) {
-        if(Object.keys(triggers[category]).length > 0) {
-            cell.innerHTML += "\n\n\n<b><u>" + category.toUpperCase() + ":</u></b>\n";
+        var perCategoryCount = Object.keys(triggers[category]).length;
+        if(perCategoryCount == 0) {
+            continue;
         }
         
+        
+        var perCategoryString = "<div class=\"triggersCategory\"><b><u>" + category.toUpperCase() + ":</u></b>\n";
+        
         for(var trigger in triggers[category]) {
-            cell.innerHTML += "\n" + triggers[category][trigger];
+            perCategoryString += "\n" + triggers[category][trigger];
         }
+        
+        perCategoryString += "</div>";
+        text += perCategoryString;
     }
     
-    cell.innerHTML = cell.innerHTML.replaceAll("\n", "<br>");
-    cell.innerHTML = cell.innerHTML.replaceAll("    ", "&nbsp;&nbsp;&nbsp;&nbsp;");
+    text += "</div>";
+    
+    text = text.replaceAll("\n", "<br>");
+    text = text.replaceAll("    ", "&nbsp;&nbsp;&nbsp;&nbsp;");
+    cell.innerHTML = text;
 }
 
 
