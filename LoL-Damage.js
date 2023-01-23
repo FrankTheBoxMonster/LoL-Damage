@@ -81,8 +81,8 @@ for(var trait in DamageCustomTraits) {
 var tableHeaderConfig = [
     { name: "name", width: "200px" },
     { name: "damage<br>type", width: "80px" },
-    { name: "properties<br>enabled", width: "210px" },
-    { name: "properties<br>disabled", width: "210px" },
+    { name: "properties<br>enabled", width: "225px" },
+    { name: "properties<br>disabled", width: "225px" },
     { name: "tags<br>enabled", width: "180px" },
     { name: "tags<br>disabled", width: "180px" },
     { name: "notes", width: "300px" },
@@ -112,7 +112,7 @@ for(var categoryName in DamageSources) {
     
     
     var category = DamageSources[categoryName];
-    if(categoryName == "systems") {
+    if(categoryName == "systems" || categoryName == "non-champions") {
         BuildDamageRecordSet(categoryName, category, "");
     } else {
         for(var sourceName in category) {

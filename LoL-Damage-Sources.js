@@ -372,7 +372,7 @@ var DamageSources = {
       },
     },
   },
-  "systems": {
+  "non-champions": {
     "fountain turret champion": {
       damageType: DamageType.True,
       damageInfo: DamageTemplate_InternalRaw,
@@ -384,28 +384,6 @@ var DamageSources = {
     "turret basic attack": {
       damageType: DamageType.Physical,
       damageInfo: DamageTemplate_Attack,
-    },
-    "champion basic attack": {
-      notes: "AP damage to structures modifies existing damage, including changing damage type, rather than creating a new instance",
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_Attack,
-    },
-    "Red Buff dot": {
-      damageType: DamageType.True,
-      damageInfo: {
-        properties: PropertyTemplate_Default,
-        tags: {
-          AOE: false,
-          Periodic: true,
-          Indirect: false,
-          BasicAttack: false,
-          ActiveSpell: false,
-          Proc: true,
-          Pet: false,
-          NonRedirectable: false,
-          Item: false,
-        },
-      },
     },
     "Cloud Drake": {
       damageType: DamageType.Physical,
@@ -447,30 +425,6 @@ var DamageSources = {
       damageType: DamageType.Physical,
       damageInfo: DamageTemplate_SingleNontargetedSpell,
     },
-    "Ward or Trap kill": {
-      notes: "plants don't die",
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_Attack,
-    },
-    "Elder Buff dot": {
-      damageType: DamageType.True,
-      damageInfo: DamageTemplate_Proc,
-    },
-    "Elder Buff execute": {
-      damageType: DamageType.True,
-      damageInfo: {
-        properties: {
-          ApplyLifesteal: false,
-          EnableCallForHelp: false,
-          RespectImmunity: true,
-          RespectDodge: false,
-          TriggerOnHitEvents: false,
-          TriggerDamageEvents: true,
-          ApplyOmnivamp: false,
-        },
-        tags: TagTemplate_Tagless,
-      },
-    },
     "Herald camp charge attack": {
       damageType: DamageType.Physical,
       damageInfo: DamageTemplate_AoeSpell,
@@ -478,21 +432,6 @@ var DamageSources = {
     "Herald camp swipe attack": {
       damageType: DamageType.Physical,
       damageInfo: DamageTemplate_AoeSpell,
-    },
-    "Herald camp eye pop": {
-      damageType: DamageType.True,
-      damageInfo: {
-        properties: {
-          ApplyLifesteal: false,
-          EnableCallForHelp: false,
-          RespectImmunity: true,
-          RespectDodge: false,
-          TriggerOnHitEvents: false,
-          TriggerDamageEvents: false,
-          ApplyOmnivamp: true,
-        },
-        tags: TagTemplate_Proc,
-      },
     },
     "Herald merc turret charge": {
       damageType: DamageType.True,
@@ -518,21 +457,6 @@ var DamageSources = {
     "Herald merc champion charge": {
       damageType: DamageType.Physical,
       damageInfo: DamageTemplate_AoeSpell,
-    },
-    "Herald merc eye pop": {
-      damageType: DamageType.True,
-      damageInfo: {
-        properties: {
-          ApplyLifesteal: false,
-          EnableCallForHelp: false,
-          RespectImmunity: true,
-          RespectDodge: false,
-          TriggerOnHitEvents: false,
-          TriggerDamageEvents: false,
-          ApplyOmnivamp: true,
-        },
-        tags: TagTemplate_Proc,
-      },
     },
     "Gromp basic attack": {
       damageType: DamageType.Magic,
@@ -608,6 +532,103 @@ var DamageSources = {
       damageType: DamageType.True,
       damageInfo: DamageTemplate_Raw,
     },
+    "Chemtech Drake": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_SingleNontargetedSpell,
+    },
+    "anti counter jungle camp suicide": {
+      damageType: DamageType.True,
+      damageInfo: {
+        properties: {
+          ApplyLifesteal: false,
+          EnableCallForHelp: false,
+          RespectImmunity: false,
+          RespectDodge: false,
+          TriggerOnHitEvents: false,
+          TriggerDamageEvents: true,
+          ApplyOmnivamp: false,
+        },
+        tags: TagTemplate_Tagless,
+      },
+    },
+  },
+  "systems": {
+    "champion basic attack": {
+      notes: "AP damage to structures modifies existing damage, including changing damage type, rather than creating a new instance",
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_Attack,
+    },
+    "Red Buff dot": {
+      damageType: DamageType.True,
+      damageInfo: {
+        properties: PropertyTemplate_Default,
+        tags: {
+          AOE: false,
+          Periodic: true,
+          Indirect: false,
+          BasicAttack: false,
+          ActiveSpell: false,
+          Proc: true,
+          Pet: false,
+          NonRedirectable: false,
+          Item: false,
+        },
+      },
+    },
+    "Ward or Trap kill": {
+      notes: "plants don't die",
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_Attack,
+    },
+    "Elder Buff dot": {
+      damageType: DamageType.True,
+      damageInfo: DamageTemplate_Proc,
+    },
+    "Elder Buff execute": {
+      damageType: DamageType.True,
+      damageInfo: {
+        properties: {
+          ApplyLifesteal: false,
+          EnableCallForHelp: false,
+          RespectImmunity: true,
+          RespectDodge: false,
+          TriggerOnHitEvents: false,
+          TriggerDamageEvents: true,
+          ApplyOmnivamp: false,
+        },
+        tags: TagTemplate_Tagless,
+      },
+    },
+    "Herald camp eye pop": {
+      damageType: DamageType.True,
+      damageInfo: {
+        properties: {
+          ApplyLifesteal: false,
+          EnableCallForHelp: false,
+          RespectImmunity: true,
+          RespectDodge: false,
+          TriggerOnHitEvents: false,
+          TriggerDamageEvents: false,
+          ApplyOmnivamp: true,
+        },
+        tags: TagTemplate_Proc,
+      },
+    },
+    "Herald merc eye pop": {
+      damageType: DamageType.True,
+      damageInfo: {
+        properties: {
+          ApplyLifesteal: false,
+          EnableCallForHelp: false,
+          RespectImmunity: true,
+          RespectDodge: false,
+          TriggerOnHitEvents: false,
+          TriggerDamageEvents: false,
+          ApplyOmnivamp: true,
+        },
+        tags: TagTemplate_Proc,
+      },
+    },
     "Infernal Soul target": {
       damageType: DamageType.Varies,
       damageInfo: {
@@ -653,25 +674,6 @@ var DamageSources = {
     },
     "Practice Tool suicide": {
       notes: "counts as self damage",
-      damageType: DamageType.True,
-      damageInfo: {
-        properties: {
-          ApplyLifesteal: false,
-          EnableCallForHelp: false,
-          RespectImmunity: false,
-          RespectDodge: false,
-          TriggerOnHitEvents: false,
-          TriggerDamageEvents: true,
-          ApplyOmnivamp: false,
-        },
-        tags: TagTemplate_Tagless,
-      },
-    },
-    "Chemtech Drake": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_SingleNontargetedSpell,
-    },
-    "anti counter jungle camp suicide": {
       damageType: DamageType.True,
       damageInfo: {
         properties: {

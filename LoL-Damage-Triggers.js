@@ -355,7 +355,6 @@ var DamageTriggers = {
         "Catalyst of Aeons": TriggerTemplates.CatalystPassive,
         "Executioner's Calling": TriggerTemplates.ExecutionersCalling,
         "Hextech Alternator": TriggerTemplates.DealAnyDamagePreApply,
-        "Kircheis Shard": TriggerTemplates.UnknownOutgoing,
         "OblivionOrb": TriggerTemplates.OblivionOrb,
         "Phage": {
             Immunity: ImmunityTemplates.PreApply,
@@ -781,6 +780,13 @@ function CheckTriggers(damageRecord) {
                 }
             }
             
+            // non-champions can't have items/runes/systems, so never show any outgoing triggers on them
+            if(damageRecord.category == "non-champions") {
+                if(trigger.Event.eventType == DamageEventType.Outgoing) {
+                    continue;
+                }
+            }
+            
             
             ResetDamageTriggerData(data);
             trigger.Function(data);
@@ -828,6 +834,10 @@ function CheckTriggers(damageRecord) {
             }
             
             
+            var lowInterestFunction = trigger.LowInterest ?? InterestTemplates.AlwaysHigh;
+            var isLowInterest = lowInterestFunction(data);
+            
+            
             var fullNotes = "";
             if(immunityNotes != "") {
                 fullNotes += "<i>" + immunityNotes + "</i>";
@@ -851,6 +861,7 @@ function CheckTriggers(damageRecord) {
             
             if(data.properties.TriggerDamageEvents == false) {
                 data.canTrigger = false;
+                isLowInterest = false;  // override so that we explicitly acknowledge things like ignoring Trynd ult and similar otherwise-"all damage" things
                 fullNotes = "this damage does not trigger any other damage events";
             }
             
@@ -864,9 +875,6 @@ function CheckTriggers(damageRecord) {
             }
             
             
-            
-            var lowInterestFunction = trigger.LowInterest ?? InterestTemplates.AlwaysHigh;
-            var isLowInterest = lowInterestFunction(data);
             
             if(isLowInterest == false) {
                 if(data.canTrigger == true) {
