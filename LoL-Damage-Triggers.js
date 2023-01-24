@@ -781,7 +781,7 @@ function CheckTriggers(damageRecord) {
             }
             
             // non-champions can't have items/runes/systems, so never show any outgoing triggers on them
-            if(damageRecord.category == "non-champions") {
+            if(damageRecord.category == "nonchampions") {
                 if(trigger.Event.eventType == DamageEventType.Outgoing) {
                     continue;
                 }

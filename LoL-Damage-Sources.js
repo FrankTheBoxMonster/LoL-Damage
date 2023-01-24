@@ -237,321 +237,6 @@ var DamageTemplate_AttackSpell = {
 
 
 var DamageSources = {
-  "summoners": {
-    "Ignite": {
-      "application": {
-        notes: "will trigger various effects otherwise confirmed to require Proc=0\n\nwill reset Teemo W, confirming Periodic=0 (normally zero damage is fine)",
-        customTraits: {
-          AlwaysZeroDamage: true,
-        },
-        damageType: DamageType.True,
-        damageInfo: {
-          properties: {
-            ApplyLifesteal: false,
-            EnableCallForHelp: true,
-            RespectImmunity: false,
-            RespectDodge: false,
-            TriggerOnHitEvents: false,
-            TriggerDamageEvents: true,
-            ApplyOmnivamp: false,
-          },
-          tags: TagTemplate_Tagless,
-        },
-      },
-      "tick": {
-        notes: "uses a zero damage instance to apply call for help",
-        damageType: DamageType.True,
-        damageInfo: {
-          properties: PropertyTemplate_Default,
-          tags: {
-            AOE: false,
-            Periodic: true,
-            Indirect: false,
-            BasicAttack: false,
-            ActiveSpell: false,
-            Proc: true,
-            Pet: false,
-            NonRedirectable: false,
-            Item: true,
-          },
-        },
-      },
-    },
-    "Smite": {
-      "damage": {
-        damageType: DamageType.True,
-        damageInfo: DamageTemplate_Proc,
-      },
-    },
-    "Unleashed Smite": {
-      "monster": {
-        damageType: DamageType.True,
-        damageInfo: DamageTemplate_Proc,
-      },
-      "champion": {
-        damageType: DamageType.True,
-        damageInfo: {
-          properties: PropertyTemplate_Default,
-          tags: {
-            AOE: false,
-            Periodic: false,
-            Indirect: false,
-            BasicAttack: false,
-            ActiveSpell: true,
-            Proc: false,
-            Pet: false,
-            NonRedirectable: false,
-            Item: true,
-          },
-        },
-      },
-    },
-    "Primal Smite": {
-      "monster target": {
-        damageType: DamageType.True,
-        damageInfo: DamageTemplate_Proc,
-      },
-      "monster aoe": {
-        damageType: DamageType.True,
-        damageInfo: DamageTemplate_Proc,
-      },
-      "champion": {
-        damageType: DamageType.True,
-        damageInfo: {
-          properties: PropertyTemplate_Default,
-          tags: {
-            AOE: false,
-            Periodic: false,
-            Indirect: false,
-            BasicAttack: false,
-            ActiveSpell: true,
-            Proc: false,
-            Pet: false,
-            NonRedirectable: false,
-            Item: true,
-          },
-        },
-      },
-    },
-    "Mark": {
-      "damage": {
-        damageType: DamageType.True,
-        damageInfo: {
-          properties: PropertyTemplate_Default,
-          tags: {
-            AOE: false,
-            Periodic: false,
-            Indirect: false,
-            BasicAttack: false,
-            ActiveSpell: true,
-            Proc: false,
-            Pet: false,
-            NonRedirectable: false,
-            Item: true,
-          },
-        },
-      },
-    },
-    "Dash": {
-      "damage": {
-        damageType: DamageType.True,
-        damageInfo: {
-          properties: PropertyTemplate_Default,
-          tags: {
-            AOE: false,
-            Periodic: false,
-            Indirect: false,
-            BasicAttack: false,
-            ActiveSpell: true,
-            Proc: false,
-            Pet: false,
-            NonRedirectable: false,
-            Item: true,
-          },
-        },
-      },
-    },
-  },
-  "non-champions": {
-    "fountain turret champion": {
-      damageType: DamageType.True,
-      damageInfo: DamageTemplate_InternalRaw,
-    },
-    "fountain turret minion": {
-      damageType: DamageType.True,
-      damageInfo: DamageTemplate_Raw,
-    },
-    "turret basic attack": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_Attack,
-    },
-    "Cloud Drake": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_SingleNontargetedSpell,
-    },
-    "Mountain Drake target": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_SingleNontargetedSpell,
-    },
-    "Mountain Drake aoe": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_SingleNontargetedSpell,
-    },
-    "Infernal Drake target": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_SingleNontargetedSpell,
-    },
-    "Infernal Drake aoe": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_SingleNontargetedSpell,
-    },
-    "Ocean Drake": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_SingleNontargetedSpell,
-    },
-    "Elder Dragon target": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_SingleNontargetedSpell,
-    },
-    "Elder Dragon aoe": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_SingleNontargetedSpell,
-    },
-    "Hextech Drake target": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_SingleNontargetedSpell,
-    },
-    "Hextech Drake aoe": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_SingleNontargetedSpell,
-    },
-    "Herald camp charge attack": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_AoeSpell,
-    },
-    "Herald camp swipe attack": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_AoeSpell,
-    },
-    "Herald merc turret charge": {
-      damageType: DamageType.True,
-      damageInfo: DamageTemplate_SingleNontargetedSpell,
-    },
-    "Herald merc attacks": {
-      notes: "ignores champions, might be able to taunt/berserk it",
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_Attack,
-    },
-    "Herald merc onhit bonus damage": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_Proc,
-    },
-    "Herald merc swipe attack": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_AoeSpell,
-    },
-    "Herald camp basic attack": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_Attack,
-    },
-    "Herald merc champion charge": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_AoeSpell,
-    },
-    "Gromp basic attack": {
-      damageType: DamageType.Magic,
-      damageInfo: DamageTemplate_Attack,
-    },
-    "Baron melee physical front": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_Attack,
-    },
-    "Baron melee physical back": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_AoeSpell,
-    },
-    "Baron ranged physical front": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_Attack,
-    },
-    "Baron ranged physical back": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_AoeSpell,
-    },
-    "Baron ranged magic": {
-      damageType: DamageType.Magic,
-      damageInfo: DamageTemplate_Proc,
-    },
-    "Baron knockup": {
-      damageType: DamageType.Magic,
-      damageInfo: DamageTemplate_AoeSpell,
-    },
-    "Baron puddle": {
-      damageType: DamageType.Magic,
-      damageInfo: DamageTemplate_AoeSpell,
-    },
-    "Baron stream": {
-      damageType: DamageType.Magic,
-      damageInfo: DamageTemplate_AoeSpell,
-    },
-    "Baron cannon minion target": {
-      damageType: DamageType.Physical,
-      damageInfo: {
-        properties: PropertyTemplate_Attack,
-        tags: {
-          AOE: true,
-          Periodic: false,
-          Indirect: false,
-          BasicAttack: false,
-          ActiveSpell: true,
-          Proc: true,
-          Pet: false,
-          NonRedirectable: false,
-          Item: false,
-        },
-      },
-    },
-    "Baron cannon minion aoe": {
-      damageType: DamageType.Physical,
-      damageInfo: {
-        properties: PropertyTemplate_Attack,
-        tags: {
-          AOE: true,
-          Periodic: false,
-          Indirect: false,
-          BasicAttack: false,
-          ActiveSpell: true,
-          Proc: true,
-          Pet: false,
-          NonRedirectable: false,
-          Item: false,
-        },
-      },
-    },
-    "minion last hit forgiveness": {
-      damageType: DamageType.True,
-      damageInfo: DamageTemplate_Raw,
-    },
-    "Chemtech Drake": {
-      damageType: DamageType.Physical,
-      damageInfo: DamageTemplate_SingleNontargetedSpell,
-    },
-    "anti counter jungle camp suicide": {
-      damageType: DamageType.True,
-      damageInfo: {
-        properties: {
-          ApplyLifesteal: false,
-          EnableCallForHelp: false,
-          RespectImmunity: false,
-          RespectDodge: false,
-          TriggerOnHitEvents: false,
-          TriggerDamageEvents: true,
-          ApplyOmnivamp: false,
-        },
-        tags: TagTemplate_Tagless,
-      },
-    },
-  },
   "systems": {
     "champion basic attack": {
       notes: "AP damage to structures modifies existing damage, including changing damage type, rather than creating a new instance",
@@ -750,6 +435,9 @@ var DamageSources = {
       "P": {
         "bonus damage": {
           notes: "applies first outside of the main damage, so if this damage is lethal then the main attack, as well as its onhit procs, will be canceled",
+          customTraits: {
+            EmpoweredAttack: true,
+          },
           damageType: DamageType.Magic,
           damageInfo: DamageTemplate_SingleNontargetedSpell,
         },
@@ -809,6 +497,9 @@ var DamageSources = {
       },
       "E": {
         "damage": {
+          customTraits: {
+            AttackEffectsSpell: "triggers some effects on each hit, but not all",
+          },
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -5658,7 +5349,7 @@ var DamageSources = {
             AttackEffectsSpell: "triggers attack effects on hit",
           },
           damageType: DamageType.Physical,
-          damageInfo: DamageTemplate_InternalRaw,
+          damageInfo: DamageTemplate_Attack,
         },
       },
       "Q": {
@@ -5678,6 +5369,16 @@ var DamageSources = {
         "damage": {
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_SingleNontargetedSpell,
+        },
+      },
+      "R": {
+        "attack": {
+          customTraits: {
+            EmpoweredAttack: true,
+            AttackEffectsSpell: "triggers attack effects on hit",
+          },
+          damageType: DamageType.Physical,
+          damageInfo: DamageTemplate_Attack,
         },
       },
     },
@@ -5998,13 +5699,25 @@ var DamageSources = {
         },
         "target minion": {
           damageType: DamageType.Physical,
-          damageInfo: DamageTemplate_InternalRaw,
+          damageInfo: DamageTemplate_AoeSpell,
         },
         "aoe minion": {
           damageType: DamageType.Physical,
-          damageInfo: DamageTemplate_InternalRaw,
+          damageInfo: DamageTemplate_AoeSpell,
         },
         "ward kill": {
+          damageType: DamageType.Physical,
+          damageInfo: DamageTemplate_Attack,
+        },
+        "soul pickup": {
+          damageType: DamageType.Physical,
+          damageInfo: DamageTemplate_AoeSpell,
+        },
+        "target turret": {
+          damageType: DamageType.Physical,
+          damageInfo: DamageTemplate_Attack,
+        },
+        "aoe turret": {
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Attack,
         },
@@ -9656,6 +9369,186 @@ var DamageSources = {
       },
     },
   },
+  "nonchampions": {
+    "fountain turret champion": {
+      damageType: DamageType.True,
+      damageInfo: DamageTemplate_InternalRaw,
+    },
+    "fountain turret minion": {
+      damageType: DamageType.True,
+      damageInfo: DamageTemplate_Raw,
+    },
+    "turret basic attack": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_Attack,
+    },
+    "Cloud Drake": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_SingleNontargetedSpell,
+    },
+    "Mountain Drake target": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_SingleNontargetedSpell,
+    },
+    "Mountain Drake aoe": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_SingleNontargetedSpell,
+    },
+    "Infernal Drake target": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_SingleNontargetedSpell,
+    },
+    "Infernal Drake aoe": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_SingleNontargetedSpell,
+    },
+    "Ocean Drake": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_SingleNontargetedSpell,
+    },
+    "Elder Dragon target": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_SingleNontargetedSpell,
+    },
+    "Elder Dragon aoe": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_SingleNontargetedSpell,
+    },
+    "Hextech Drake target": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_SingleNontargetedSpell,
+    },
+    "Hextech Drake aoe": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_SingleNontargetedSpell,
+    },
+    "Herald camp charge attack": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_AoeSpell,
+    },
+    "Herald camp swipe attack": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_AoeSpell,
+    },
+    "Herald merc turret charge": {
+      damageType: DamageType.True,
+      damageInfo: DamageTemplate_SingleNontargetedSpell,
+    },
+    "Herald merc attacks": {
+      notes: "ignores champions, might be able to taunt/berserk it",
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_Attack,
+    },
+    "Herald merc onhit bonus damage": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_Proc,
+    },
+    "Herald merc swipe attack": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_AoeSpell,
+    },
+    "Herald camp basic attack": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_Attack,
+    },
+    "Herald merc champion charge": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_AoeSpell,
+    },
+    "Gromp basic attack": {
+      damageType: DamageType.Magic,
+      damageInfo: DamageTemplate_Attack,
+    },
+    "Baron melee physical front": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_Attack,
+    },
+    "Baron melee physical back": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_AoeSpell,
+    },
+    "Baron ranged physical front": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_Attack,
+    },
+    "Baron ranged physical back": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_AoeSpell,
+    },
+    "Baron ranged magic": {
+      damageType: DamageType.Magic,
+      damageInfo: DamageTemplate_Proc,
+    },
+    "Baron knockup": {
+      damageType: DamageType.Magic,
+      damageInfo: DamageTemplate_AoeSpell,
+    },
+    "Baron puddle": {
+      damageType: DamageType.Magic,
+      damageInfo: DamageTemplate_AoeSpell,
+    },
+    "Baron stream": {
+      damageType: DamageType.Magic,
+      damageInfo: DamageTemplate_AoeSpell,
+    },
+    "Baron cannon minion target": {
+      damageType: DamageType.Physical,
+      damageInfo: {
+        properties: PropertyTemplate_Attack,
+        tags: {
+          AOE: true,
+          Periodic: false,
+          Indirect: false,
+          BasicAttack: false,
+          ActiveSpell: true,
+          Proc: true,
+          Pet: false,
+          NonRedirectable: false,
+          Item: false,
+        },
+      },
+    },
+    "Baron cannon minion aoe": {
+      damageType: DamageType.Physical,
+      damageInfo: {
+        properties: PropertyTemplate_Attack,
+        tags: {
+          AOE: true,
+          Periodic: false,
+          Indirect: false,
+          BasicAttack: false,
+          ActiveSpell: true,
+          Proc: true,
+          Pet: false,
+          NonRedirectable: false,
+          Item: false,
+        },
+      },
+    },
+    "minion last hit forgiveness": {
+      damageType: DamageType.True,
+      damageInfo: DamageTemplate_Raw,
+    },
+    "Chemtech Drake": {
+      damageType: DamageType.Physical,
+      damageInfo: DamageTemplate_SingleNontargetedSpell,
+    },
+    "anti counter jungle camp suicide": {
+      damageType: DamageType.True,
+      damageInfo: {
+        properties: {
+          ApplyLifesteal: false,
+          EnableCallForHelp: false,
+          RespectImmunity: false,
+          RespectDodge: false,
+          TriggerOnHitEvents: false,
+          TriggerDamageEvents: true,
+          ApplyOmnivamp: false,
+        },
+        tags: TagTemplate_Tagless,
+      },
+    },
+  },
   "runes": {
     "Press the Attack": {
       "proc": {
@@ -9825,6 +9718,141 @@ var DamageSources = {
             ApplyOmnivamp: false,
           },
           tags: TagTemplate_Tagless,
+        },
+      },
+    },
+  },
+  "summoners": {
+    "Ignite": {
+      "application": {
+        notes: "will trigger various effects otherwise confirmed to require Proc=0\n\nwill reset Teemo W, confirming Periodic=0 (normally zero damage is fine)",
+        customTraits: {
+          AlwaysZeroDamage: true,
+        },
+        damageType: DamageType.True,
+        damageInfo: {
+          properties: {
+            ApplyLifesteal: false,
+            EnableCallForHelp: true,
+            RespectImmunity: false,
+            RespectDodge: false,
+            TriggerOnHitEvents: false,
+            TriggerDamageEvents: true,
+            ApplyOmnivamp: false,
+          },
+          tags: TagTemplate_Tagless,
+        },
+      },
+      "tick": {
+        notes: "uses a zero damage instance to apply call for help",
+        damageType: DamageType.True,
+        damageInfo: {
+          properties: PropertyTemplate_Default,
+          tags: {
+            AOE: false,
+            Periodic: true,
+            Indirect: false,
+            BasicAttack: false,
+            ActiveSpell: false,
+            Proc: true,
+            Pet: false,
+            NonRedirectable: false,
+            Item: true,
+          },
+        },
+      },
+    },
+    "Smite": {
+      "damage": {
+        damageType: DamageType.True,
+        damageInfo: DamageTemplate_Proc,
+      },
+    },
+    "Unleashed Smite": {
+      "monster": {
+        damageType: DamageType.True,
+        damageInfo: DamageTemplate_Proc,
+      },
+      "champion": {
+        damageType: DamageType.True,
+        damageInfo: {
+          properties: PropertyTemplate_Default,
+          tags: {
+            AOE: false,
+            Periodic: false,
+            Indirect: false,
+            BasicAttack: false,
+            ActiveSpell: true,
+            Proc: false,
+            Pet: false,
+            NonRedirectable: false,
+            Item: true,
+          },
+        },
+      },
+    },
+    "Primal Smite": {
+      "monster target": {
+        damageType: DamageType.True,
+        damageInfo: DamageTemplate_Proc,
+      },
+      "monster aoe": {
+        damageType: DamageType.True,
+        damageInfo: DamageTemplate_Proc,
+      },
+      "champion": {
+        damageType: DamageType.True,
+        damageInfo: {
+          properties: PropertyTemplate_Default,
+          tags: {
+            AOE: false,
+            Periodic: false,
+            Indirect: false,
+            BasicAttack: false,
+            ActiveSpell: true,
+            Proc: false,
+            Pet: false,
+            NonRedirectable: false,
+            Item: true,
+          },
+        },
+      },
+    },
+    "Mark": {
+      "damage": {
+        damageType: DamageType.True,
+        damageInfo: {
+          properties: PropertyTemplate_Default,
+          tags: {
+            AOE: false,
+            Periodic: false,
+            Indirect: false,
+            BasicAttack: false,
+            ActiveSpell: true,
+            Proc: false,
+            Pet: false,
+            NonRedirectable: false,
+            Item: true,
+          },
+        },
+      },
+    },
+    "Dash": {
+      "damage": {
+        damageType: DamageType.True,
+        damageInfo: {
+          properties: PropertyTemplate_Default,
+          tags: {
+            AOE: false,
+            Periodic: false,
+            Indirect: false,
+            BasicAttack: false,
+            ActiveSpell: true,
+            Proc: false,
+            Pet: false,
+            NonRedirectable: false,
+            Item: true,
+          },
         },
       },
     },

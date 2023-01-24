@@ -117,7 +117,7 @@ for(var categoryName in DamageSources) {
     
     
     var category = DamageSources[categoryName];
-    if(categoryName == "systems" || categoryName == "non-champions") {
+    if(categoryName == "systems" || categoryName == "nonchampions") {
         BuildDamageRecordSet(categoryName, category, "");
     } else {
         for(var sourceName in category) {
