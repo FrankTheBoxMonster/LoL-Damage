@@ -61,3 +61,43 @@ th, td {
     margin-bottom: 40px;
     break-inside: avoid;
 }
+
+
+
+.foldout {
+    -webkit-appearance: initial;
+    appearance: initial;
+    width: 13px;
+    height: 13px;
+    border: solid;
+    border-width: 1px;
+    color: rgb(118, 118, 118);
+    border-radius: 2.5px;
+    margin-bottom: 0px;
+}
+
+.foldout:hover {
+    color: rgb(79, 79, 79);
+}
+
+.foldout:active {
+    color: rgb(141, 141, 141);
+}
+
+.foldout:after {
+  content: "+";
+  position: absolute;
+  transform: translate(0%,-25%);
+  font-size: 18px;
+}
+
+.foldout:checked:after {
+    content: "-";
+    font-size: 16px;
+    transform: translate(50%,-27%) scale(175%, 125%);
+    filter: blur(0.1px)
+}
+
+.foldout:indeterminate:after {
+    content: "+";
+}

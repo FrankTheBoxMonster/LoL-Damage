@@ -1,0 +1,9 @@
+does Zac P redirect damage get double amped by Riftmaker?  it might not depending on the ordering
+
+handle champion exclusion filters
+ - main concern here is every value that gets added results in less usability regarding templates
+ - could potentially extract the current trigger to a separate variable within a larger struct, but then that increases complexity in the data itself
+ - probably for the best tho as we'll be able to use templates for targeting flags as well?
+	 - might be able to add this to sources as well so that non-champion Smite doesn't list champion interactions?
+
+add attack effects handling
