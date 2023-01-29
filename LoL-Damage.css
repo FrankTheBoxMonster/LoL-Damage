@@ -16,6 +16,10 @@ th, td {
     height: 1px;  // this lets the trigger containers inherit the full height so that small contents form a single column instead of several
 }
 
+a:visited {
+  color: blue;  // overrides purple links for consistency
+}
+
 
 .tooltip {
   position: relative;

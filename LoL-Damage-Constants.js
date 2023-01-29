@@ -127,3 +127,17 @@ const DamageEvent = {
         eventType: DamageEventType.Incoming,
     },
 }
+
+
+const SyntaxHighlighting = {
+    Background: "rgb(30, 30, 30)",
+    Foreground: "rgb(220, 220, 220)",
+    Keyword: "rgb(86, 156, 214)",
+    Type: "rgb(78, 201, 176)",
+    Enum: "rgb(184, 215, 163)",
+    Comment: "rgb(87, 166, 74)",
+    Number: "rgb(181, 206, 168)",
+    Operator: "rgb(180, 180, 180)",
+    String: "rgb(214, 157, 133)",
+    Asset: "rgb(255, 128, 192)",
+}
