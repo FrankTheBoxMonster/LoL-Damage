@@ -7580,6 +7580,7 @@ var DamageSources = {
       },
       "R": {
         "damage": {
+          notes: "does a zero instance to each target 0.5 after damaging to trigger turret call for help so they can still aggro despite being untargetable while dealing damage\n\nhowever, this damage as a common conflation with having the call for help property set, which isn't actually used by turret call for help, but is used by minions\n\nas a result, Xayah will always come out of ult into full minion aggro",
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_AoeSpell,
         },

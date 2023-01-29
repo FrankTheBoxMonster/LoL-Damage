@@ -97,7 +97,10 @@ var InterestTemplates = {
     },
     OnlyShowIfTrue: function(data) {  // aka hide if false
         return (data.result == false);
-    }
+    },
+    OnHitOrProc: function(data) {  // because Tabis are often questioned for reduing procs too
+        return (InterestTemplates.OnHit(data) && data.tags.Proc == false);
+    },
 }
 
 
@@ -196,7 +199,7 @@ var TriggerTemplates = {
             InvulnDamage: DamageImmunityValue.Irrelevant,
         },
         Event: DamageEvent.UnknownIncoming,
-        LowInterest: InterestTemplates.OnHit,
+        LowInterest: InterestTemplates.OnHitOrProc,
         Function: FunctionTemplates.BasicAttackAndOnHit,
     },
     CatalystPassive: {
@@ -568,7 +571,7 @@ var DamageTriggers = {
         "Plated Steelcaps": {
             Immunity: ImmunityTemplates.DamageMultiplier,
             Event: DamageEvent.UnknownIncoming,
-            LowInterest: InterestTemplates.OnHit,
+            LowInterest: InterestTemplates.OnHitOrProc,
             Function: function(data) {
                 data.canTrigger = (data.tags.BasicAttack == true && data.tags.ActiveSpell == false && data.tags.Pet == false);
                 if(data.tags.BasicAttack == true && data.tags.ActiveSpell == true) {
@@ -601,7 +604,7 @@ var DamageTriggers = {
         "Hullbreaker": {
             Immunity: ImmunityTemplates.DamageMultiplier,
             Event: DamageEvent.UnknownOutgoing,
-            LowInterest: InterestTemplates.OnHit,
+            LowInterest: InterestTemplates.OnHitOrProc,
             Function: function(data) {
                 data.canTrigger = (data.tags.BasicAttack == true && data.tags.Proc == false);
             }
