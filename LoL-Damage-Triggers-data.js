@@ -212,7 +212,7 @@ var TriggerTemplates = {
     SleepWakeup: {
         Immunity: ImmunityTemplates.NonZero,
         Event: DamageEvent.UnknownIncoming,
-        GeneralNotes: "does not wake on any damage from minions, but can be woken by monsters or the enemy team (if sleeping a monster), with the wakeup damage always being attributed to the person who applied the sleep\nadditionally does not wake if the post-mitigation pre-shielding damage dealt is <= 10 (at all levels, ranks, and AP values, might be unintended that it doesn't ever scale)",
+        GeneralNotes: "does not wake on any damage from minions, but can be woken by monsters or the enemy team (if sleeping a monster), with the wakeup damage always being attributed to the person who applied the sleep\n\nadditionally does not wake if the post-mitigation pre-shielding damage dealt is <= 10 (at all levels, ranks, and AP values, might be unintended that it doesn't ever scale)",
         Function: function(data) {
             var hasValid = (data.tags.ActiveSpell == true || data.tags.BasicAttack == true || data.tags.Pet == true);
             var hasInvalid = (data.tags.Periodic == true || data.tags.Indirect == true);
@@ -413,7 +413,7 @@ var DamageTriggers = {
         "Navori Quickblades amp": {
             Immunity: ImmunityTemplates.DamageMultiplier,
             Event: DamageEvent.UnknownOutgoing,
-            GeneralNotes: "only PQWER slots work, no summoners / items / runes\nunclear if pet amps are intentional or not, as all pets in practice also have the intended tags\nempowered attacks only work if they would apply spell effects",
+            GeneralNotes: "only PQWER slots work, no summoners / items / runes\n\nunclear if pet amps are intentional or not, as all pets in practice also have the intended tags\n\nempowered attacks only work if they would apply spell effects",
             Function: function(data) {
                 var validSlot = (data.category == "champions");
                 data.canTrigger = ((data.tags.ActiveSpell == true || data.tags.Proc == true) && validSlot == true);

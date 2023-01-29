@@ -463,6 +463,7 @@ function PreProcessDamageTriggers() {
             trigger.fullName = triggerName;
             
             trigger.GeneralNotes = trigger.GeneralNotes ?? "";
+            trigger.GeneralNotes = trigger.GeneralNotes.replaceAll("\n", "<br>");
         }
     }
 }

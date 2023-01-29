@@ -231,6 +231,8 @@ function PreProcessDamageRecordSet(category, records, namePrefix) {
         DamageSourcesByName[record.fullName] = record;
         
         record.notes = record.notes ?? "";
+        record.notes = record.notes.replaceAll("\n", "<br>");
+        
         record.customTraits = record.customTraits ?? {};
     }
 }
