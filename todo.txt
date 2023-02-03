@@ -7,3 +7,13 @@ handle champion exclusion filters
 	 - might be able to add this to sources as well so that non-champion Smite doesn't list champion interactions?
 
 add attack effects handling
+
+add colloq support (so that searching "tabis" will return "steelcaps", but also allow for "asol" vs "aurelionsol" vs "aurelion sol" [with a space])
+
+add a way to link triggers and sources to each other, essentially it should be able to see that Vayne Q will pass for Tabis trigger, then also see that it will pass for Luden's and Bork triggers, which will then map to Luden's and Bork damage, and then add those damages into the Tabis trigger list, with a special hover note like "if triggered by something else"
+ - this can then be used as a way to get non-onhit proc damage like Corrupting Pot out of the Tabi's list
+ - this will break the current optimization of "only calculate triggers when you try to expand them" since that works in isolation
+ - however, it's possible the previous excessive load times would return by checking every source with every trigger again
+ - it's also possible that load time was due to the trigger results being inserted into the page then hidden, requiring the HTML to rebuild itself
+ - it's possible that we could avoid that by holding the results outside of the page and only inserting into the page when expanded?
+ - as a last resort we could also have it prebuild trigger data locally and push that as a separate data table

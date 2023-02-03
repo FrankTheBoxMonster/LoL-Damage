@@ -1062,31 +1062,69 @@ var DamageSources = {
       },
     },
     "AurelionSol": {
-      "P": {
-        "damage": {
-          damageType: DamageType.Magic,
-          damageInfo: DamageTemplate_AoeSpell,
-        },
-        "minion execute": {
-          notes: "post-apply, triggers if minions are left with <=25 health",
-          damageType: DamageType.Magic,
-          damageInfo: DamageTemplate_Proc,
-        },
-      },
       "Q": {
-        "damage": {
+        "primary target": {
+          notes: "applies third, if burst is applicable",
           damageType: DamageType.Magic,
-          damageInfo: DamageTemplate_AoeSpell,
+          damageInfo: DamageTemplate_AoeDotSpell,
+        },
+        "secondary target": {
+          damageType: DamageType.Magic,
+          damageInfo: DamageTemplate_AoeDotSpell,
+        },
+        "burst flat damage": {
+          notes: "applies first",
+          damageType: DamageType.Magic,
+          damageInfo: DamageTemplate_SingleTargetedSpell,
+        },
+        "burst percent damage": {
+          notes: "applies second",
+          customTraits: {
+            SometimesZeroDamage: "this damage will evaluate to zero if you have zero Stardust stacks",
+          },
+          damageType: DamageType.Magic,
+          damageInfo: DamageTemplate_SingleTargetedSpell,
         },
       },
       "W": {
-        "damage": {
+        "Q amp": {
+          notes: "same as main instances, applies to everything except the percent damage",
           damageType: DamageType.Magic,
-          damageInfo: DamageTemplate_AoeSpell,
+          damageInfo: DamageTemplate_AoeDotSpell,
+        },
+      },
+      "E": {
+        "tick": {
+          notes: "only targets in the center get executed, so this can still freely be lethal",
+          damageType: DamageType.Magic,
+          damageInfo: DamageTemplate_AoeDotSpell,
+        },
+        "execute": {
+          damageType: DamageType.True,
+          damageInfo: {
+            properties: {
+              ApplyLifesteal: false,
+              EnableCallForHelp: true,
+              RespectImmunity: true,
+              RespectDodge: false,
+              TriggerOnHitEvents: false,
+              TriggerDamageEvents: true,
+              ApplyOmnivamp: false,
+            },
+            tags: TagTemplate_Tagless,
+          },
         },
       },
       "R": {
-        "damage": {
+        "standard damage": {
+          damageType: DamageType.Magic,
+          damageInfo: DamageTemplate_AoeSpell_WithCallForHelp,
+        },
+        "empowered main damage": {
+          damageType: DamageType.Magic,
+          damageInfo: DamageTemplate_AoeSpell,
+        },
+        "empowered shockwave damage": {
           damageType: DamageType.Magic,
           damageInfo: DamageTemplate_AoeSpell,
         },
@@ -8566,6 +8604,27 @@ var DamageSources = {
       notes: "applies first\n\nremoved in 12.23",
       damageType: DamageType.Magic,
       damageInfo: DamageTemplate_Proc,
+    },
+    "AurelionSol_old P": {
+      damageType: DamageType.Magic,
+      damageInfo: DamageTemplate_AoeSpell,
+    },
+    "AurelionSol_old P minion execute": {
+      notes: "post-apply, triggers if minions are left with <=25 health",
+      damageType: DamageType.Magic,
+      damageInfo: DamageTemplate_Proc,
+    },
+    "AurelionSol_old Q": {
+      damageType: DamageType.Magic,
+      damageInfo: DamageTemplate_AoeSpell,
+    },
+    "AurelionSol_old W": {
+      damageType: DamageType.Magic,
+      damageInfo: DamageTemplate_AoeSpell,
+    },
+    "AurelionSol_old R": {
+      damageType: DamageType.Magic,
+      damageInfo: DamageTemplate_AoeSpell,
     },
   },
   "items": {
