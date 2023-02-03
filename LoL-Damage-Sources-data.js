@@ -1064,7 +1064,7 @@ var DamageSources = {
     "AurelionSol": {
       "Q": {
         "primary target": {
-          notes: "applies third, if burst is applicable",
+          notes: "applies third, if burst is applicable\n\nW amp applies to the same instance for everything except the percent damage (which doesn't apply it at all)",
           damageType: DamageType.Magic,
           damageInfo: DamageTemplate_AoeDotSpell,
         },
@@ -1084,13 +1084,6 @@ var DamageSources = {
           },
           damageType: DamageType.Magic,
           damageInfo: DamageTemplate_SingleTargetedSpell,
-        },
-      },
-      "W": {
-        "Q amp": {
-          notes: "same as main instances, applies to everything except the percent damage",
-          damageType: DamageType.Magic,
-          damageInfo: DamageTemplate_AoeDotSpell,
         },
       },
       "E": {
