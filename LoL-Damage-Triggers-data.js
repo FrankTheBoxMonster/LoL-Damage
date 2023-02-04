@@ -312,7 +312,7 @@ var DamageTriggers = {
             GeneralNotes: TriggerNotes.NonDamageDebuffs,
             Function: FunctionTemplates.SpellOrPet,
         },
-        "Scorch": TriggerTemplates.DealAnyNonProcDamage,
+        "Scorch": TriggerTemplates.DealSpellEffects,
         "Second Wind": TriggerTemplates.TakeAnyDamagePostApply,
         "Bone Plating": TriggerTemplates.UnknownIncoming,
         "First Strike": TriggerTemplates.DealAnyDamagePreApply,
@@ -573,7 +573,7 @@ var DamageTriggers = {
             Event: DamageEvent.UnknownIncoming,
             LowInterest: InterestTemplates.OnHitOrProc,
             Function: function(data) {
-                data.canTrigger = (data.tags.BasicAttack == true && data.tags.ActiveSpell == false && data.tags.Pet == false);
+                data.canTrigger = (data.tags.BasicAttack == true && data.tags.ActiveSpell == false && data.tags.Proc == false);
                 if(data.tags.BasicAttack == true && data.tags.ActiveSpell == true) {
                     data.specialNotes = "bugged to not be reduced";
                 }
