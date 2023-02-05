@@ -18,6 +18,8 @@ add a way to link triggers and sources to each other, essentially it should be a
  - it's possible that we could avoid that by holding the results outside of the page and only inserting into the page when expanded?
  - as a last resort we could also have it prebuild trigger data locally and push that as a separate data table
 
+convert checkboxes to images for consistency with different browsers (same with the link text color override)
+
 
 
 check Aphelios Infernum splash with Tabi's (tags.BasicAttack and tags.Proc)

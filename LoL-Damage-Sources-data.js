@@ -6508,13 +6508,21 @@ var DamageSources = {
         },
         "second cast": {
           damageType: DamageType.Magic,
-          damageInfo: DamageTemplate_AoeDotSpell,
+          damageInfo: DamageTemplate_AoeSpell,
         },
       },
       "E": {
-        "damage": {
+        "initial damage": {
           damageType: DamageType.Magic,
-          damageInfo: DamageTemplate_AoeDotSpell,
+          damageInfo: DamageTemplate_AoeSpell,
+        },
+        "detonation first hit": {
+          damageType: DamageType.Magic,
+          damageInfo: DamageTemplate_AoeSpell,
+        },
+        "detonation second hits": {
+          damageType: DamageType.Magic,
+          damageInfo: DamageTemplate_AoeSpell,
         },
       },
     },
