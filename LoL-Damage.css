@@ -53,8 +53,8 @@ a:visited {
 .triggersContainer {
     column-count: 3;
     column-gap: 20px;
-    column-fill: auto;
-    height: 100%;
+    column-fill: balance-all;
+    height: auto;
 }
 
 .triggersHeader {

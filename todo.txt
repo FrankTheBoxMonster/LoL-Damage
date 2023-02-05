@@ -22,3 +22,26 @@ add a way to link triggers and sources to each other, essentially it should be a
 
 check Aphelios Infernum splash with Tabi's (tags.BasicAttack and tags.Proc)
 check Randuin's ("if tags.BasicAttack and IsCrit?"), maybe also put a "can crit" trait? (Rengar Q should also be visual crit only?)
+
+
+
+
+Manaflow Band checks for tags.ActiveSpell in QWER (no P)
+
+Urgot - P special case
+Zeri - P special case (regardless of charge?  or does it count as Q?)
+
+Corki - PW works (counts as W)
+Illaoi - W slam doesn't work, E slam doesn't work (regardless of clone or target), E slow does work
+Senna - nvm
+
+Ivern - W passive works
+
+Blitzcrank - R passive doesn't work (used to pre-Renata?)
+Fizz - W passive doesn't work, active does
+Tristana - E passive works
+Jax - R passive doesn't work
+Zoe - passive works, items/summoners from W works
+Vayne - Q works
+
+Elise - P spiders work (do they count as R?)

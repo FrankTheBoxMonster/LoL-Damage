@@ -2958,15 +2958,20 @@ var DamageSources = {
       },
       "E": {
         "damage": {
-          damageType: DamageType.Physical,
+          notes: "all bonus damage is applied to the main instance",
+          damageType: DamageType.Magic,
           damageInfo: DamageTemplate_AoeSpell,
         },
       },
       "R": {
-        "damage": {
+        "passive": {
           notes: "pre apply",
           damageType: DamageType.Magic,
           damageInfo: DamageTemplate_Proc,
+        },
+        "active": {
+          damageType: DamageType.Magic,
+          damageInfo: DamageTemplate_AoeSpell,
         },
       },
     },
