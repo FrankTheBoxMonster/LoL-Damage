@@ -322,7 +322,12 @@ var DamageTriggers = {
         "Doran's Ring regen": TriggerTemplates.DealAnyDamagePreApply,
         "Doran's Shield regen": TriggerTemplates.TakeAnyDamagePostApply,
         "Jungle pet attacks": TriggerTemplates.UnknownOutgoing,
-        "Scorchclaw passive": TriggerTemplates.DealAnyNonProcDamage,
+        "Scorchclaw passive": {
+            Immunity: ImmunityTemplates.PreApply,
+            Event: DamageEvent.UnknownOutgoing,
+            GeneralNotes: "prior to 13.3, was purely non-proc, meaning almost all pets couldn't trigger it due to also being proc",
+            Function: FunctionTemplates.PetOrNonProc,
+        },
         "Guardian's Horn regen": TriggerTemplates.UnknownIncoming,
         "Ultbook Attack-Smite": TriggerTemplates.UnknownOutgoing,
         "Support Item poke": {

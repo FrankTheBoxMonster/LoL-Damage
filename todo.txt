@@ -20,6 +20,10 @@ add a way to link triggers and sources to each other, essentially it should be a
 
 convert checkboxes to images for consistency with different browsers (same with the link text color override)
 
+add a "none" tags filter option
+
+add an option to make checkboxes an AND or an OR
+
 
 
 check Aphelios Infernum splash with Tabi's (tags.BasicAttack and tags.Proc)
