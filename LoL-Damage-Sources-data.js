@@ -1073,17 +1073,17 @@ var DamageSources = {
           damageInfo: DamageTemplate_AoeDotSpell,
         },
         "burst flat damage": {
-          notes: "applies first",
+          notes: "applies first\n\napplied call for help initially on release, but was hotfixed",
           damageType: DamageType.Magic,
-          damageInfo: DamageTemplate_SingleTargetedSpell,
+          damageInfo: DamageTemplate_SingleNontargetedSpell,
         },
         "burst percent damage": {
-          notes: "applies second",
+          notes: "applies second\n\napplied call for help initially on release, but was hotfixed",
           customTraits: {
             SometimesZeroDamage: "this damage will evaluate to zero if you have zero Stardust stacks",
           },
           damageType: DamageType.Magic,
-          damageInfo: DamageTemplate_SingleTargetedSpell,
+          damageInfo: DamageTemplate_SingleNontargetedSpell,
         },
       },
       "E": {
@@ -1110,6 +1110,7 @@ var DamageSources = {
       },
       "R": {
         "standard damage": {
+          notes: "did not have call for help removed in the Q hotfix",
           damageType: DamageType.Magic,
           damageInfo: DamageTemplate_AoeSpell_WithCallForHelp,
         },
