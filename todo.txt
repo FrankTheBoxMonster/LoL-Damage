@@ -24,6 +24,8 @@ add a "none" tags filter option
 
 add an option to make checkboxes an AND or an OR
 
+make a way to filter both champion *and* source (e.g. one box for "Zeri" and another box for "Navori" with a include/exclude/don't care to show only that overlap)
+
 
 
 check Aphelios Infernum splash with Tabi's (tags.BasicAttack and tags.Proc)

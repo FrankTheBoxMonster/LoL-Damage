@@ -2,7 +2,7 @@ var urlMarker = "/LoL-Damage";
 var baseUrl = document.URL.substring(0, document.URL.indexOf(urlMarker) + urlMarker.length);
 
 var issuesDisclaimer = CreateAndAppendElement("p");
-issuesDisclaimer.innerHTML = "<b>THIS SYSTEM IS A WORK IN PROGRESS.</b>  It does <b>NOT</b> claim to be perfect, <b>BUT</b> it should be pretty close.<br>This is all the result of human research.  We're usually pretty good, but with a couple hundred thousand unique interactions possible, there's always room for errors.  You should always test to confirm things before risking your ranked games.<br>If something seems missing, nonsensical, or wrong <b><i><u>AND YOU CAN PROVE IT</u></i></b> then please submit an issue <b><a href=https://github.com/FrankTheBoxMonster/LoL-Damage/issues/new>HERE</a></b> with details.";
+issuesDisclaimer.innerHTML = "<b>THIS SYSTEM IS A WORK IN PROGRESS.</b>  It does <b>NOT</b> claim to be perfect, <b>BUT</b> it should be pretty close.<br>This is all the result of human research.  We're usually pretty good, but with a couple hundred thousand unique interactions possible, there's always room for errors.<br>Sometimes things also get stealth changed, which can take a while to be found.  You should always test to confirm things before risking your ranked games.<br>If something seems missing, nonsensical, or wrong <b><i><u>AND YOU CAN PROVE IT</u></i></b> then please submit an issue <b><a href=https://github.com/FrankTheBoxMonster/LoL-Damage/issues/new>HERE</a></b> with details.";
 
 var sourcesTriggersLinks = CreateAndAppendElement("p");
 sourcesTriggersLinks.innerHTML = "<b><a href=" + baseUrl + "/sources.html>click here to view by sources</a>, or <a href=" + baseUrl + "/triggers.html>click here to view by triggers</a></b>";

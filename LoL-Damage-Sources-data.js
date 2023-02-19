@@ -4343,9 +4343,9 @@ var DamageSources = {
     "MissFortune": {
       "P": {
         "damage": {
-          notes: "applies before attacks, pre apply for Q?",
+          notes: "applies before attacks, pre apply for Q?\n\nsometime after 12.23 but on or before 13.3, was made Proc (was previously just BasicAttack, which is how the Zyra support interaction happened)",
           damageType: DamageType.Physical,
-          damageInfo: DamageTemplate_Attack_NoOnHits,
+          damageInfo: DamageTemplate_Proc_WithLifesteal,
         },
       },
       "Q": {
