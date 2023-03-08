@@ -588,6 +588,15 @@ var DamageTriggers = {
                 }
             }
         },
+        "Plated Steelcaps (13.5 bugfix)": {
+            Immunity: ImmunityTemplates.DamageMultiplier,
+            Event: DamageEvent.UnknownIncoming,
+            LowInterest: InterestTemplates.OnHitOrProc,
+            GeneralNotes: "for this trigger, \"allowed\" means anything that was previously not being reduced, but will now be reduced with the 13.5 patch, anything else either was already reduced properly or is not supposed to be reduced in the first place in accordance with the real \"Plated Steelcaps\" trigger",
+            Function: function(data) {
+                data.canTrigger = (data.tags.BasicAttack == true && (data.tags.ActiveSpell == true || data.tags.Proc == true));
+            }
+        },
         
         "Sheen": TriggerTemplates.DealOnHitNonDamage,
         "Bramble Vest": TriggerTemplates.Thornmail,
