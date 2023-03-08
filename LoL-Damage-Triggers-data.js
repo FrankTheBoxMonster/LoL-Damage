@@ -578,9 +578,13 @@ var DamageTriggers = {
             Event: DamageEvent.UnknownIncoming,
             LowInterest: InterestTemplates.OnHitOrProc,
             Function: function(data) {
-                data.canTrigger = (data.tags.BasicAttack == true && data.tags.ActiveSpell == false && data.tags.Proc == false);
-                if(data.tags.BasicAttack == true && data.tags.ActiveSpell == true) {
-                    data.specialNotes = "bugged to not be reduced";
+                data.canTrigger = (data.tags.BasicAttack == true);
+                if(data.canTrigger == true) {
+                    if(data.tags.Proc == true) {
+                        data.specialNotes = "prior to 13.5, would not have been reduced, but this might have been intentional";
+                    } else if(data.tags.ActiveSpell == true) {
+                        data.specialNotes = "prior to 13.5, was bugged to not be reduced, even though these effects were reduced prior to gaining spell effects";
+                    }
                 }
             }
         },

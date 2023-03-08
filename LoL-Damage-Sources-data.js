@@ -2020,9 +2020,12 @@ var DamageSources = {
     "Fizz": {
       "Q": {
         "physical": {
-          notes: "applies first",
+          notes: "applies first\n\nprior to 13.5, was BasicAttack only, so Q alone wouldn't trigger spell effects if W was not applying the passive dot",
+          customTraits: {
+            AttackEffectsSpell: false,
+          },
           damageType: DamageType.Physical,
-          damageInfo: DamageTemplate_Attack,
+          damageInfo: DamageTemplate_AttackSpell,
         },
         "magic": {
           notes: "applies second",
@@ -4340,10 +4343,42 @@ var DamageSources = {
         },
       },
     },
+    "Milio": {
+      "P": {
+        "proc": {
+          notes: "post apply",
+          damageType: DamageType.Magic,
+          damageInfo: DamageTemplate_Proc,
+        },
+        "dot": {
+          damageType: DamageType.Magic,
+          damageInfo: {
+            properties: PropertyTemplate_Default,
+            tags: {
+              AOE: false,
+              Periodic: true,
+              Indirect: false,
+              BasicAttack: false,
+              ActiveSpell: false,
+              Proc: true,
+              Pet: false,
+              NonRedirectable: false,
+              Item: false,
+            },
+          },
+        },
+      },
+      "Q": {
+        "damage": {
+          damageType: DamageType.Magic,
+          damageInfo: DamageTemplate_AoeSpell,
+        },
+      },
+    },
     "MissFortune": {
       "P": {
         "damage": {
-          notes: "applies before attacks, pre apply for Q?\n\nsometime after 12.23 but on or before 13.3, was made Proc (was previously just BasicAttack, which is how the Zyra support interaction happened)",
+          notes: "applies before attacks, pre apply for Q?\n\nsometime after 12.23 but on or before 13.3, was made Proc (was previously just BasicAttack but with no onhits, which is how the Zyra support interaction happened)",
           damageType: DamageType.Physical,
           damageInfo: DamageTemplate_Proc_WithLifesteal,
         },
